@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="194" height="194" viewBox="0 0 194 194">
+  <defs>
+    <filter id="Base" x="0" y="0" width="194" height="194" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feFlood flood-opacity="0.059"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_3610" data-name="Group 3610" transform="translate(-586.5 -501)">
+    <g id="Icon" transform="translate(658.5 571)">
+      <g transform="matrix(1, 0, 0, 1, -72, -70)" filter="url(#Base)">
+        <circle id="Base-2" data-name="Base" cx="25" cy="25" r="25" transform="translate(72 70)" fill="#f8f8f8"/>
+      </g>
+    </g>
+    <path id="Icon_material-videocam-off" data-name="Icon material-videocam-off" d="M28,8.921l-5.263,5.263V9.579a1.32,1.32,0,0,0-1.316-1.316H13.289L28,22.974ZM4.671,3,3,4.671,6.592,8.263H5.632A1.32,1.32,0,0,0,4.316,9.579V22.737a1.32,1.32,0,0,0,1.316,1.316H21.421a1.275,1.275,0,0,0,.711-.237L26.329,28,28,26.329Z" transform="translate(667.849 580.75)" fill="#153472"/>
+  </g>
+</svg>

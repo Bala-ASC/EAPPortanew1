@@ -1,0 +1,85 @@
+<div class="group-hd">
+  <ul class="top-bar order-md-1">
+    <li><a href="tel:1800818728"><img src="/assets/images/phone-call.svg" alt="phone call"> 1800 818 728</a></li>
+    <li><a (click)="makebooking()"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> Make a booking</a></li>
+    <li><a (click)="ClickInstantchattop()"><img src="/assets/images/chat.svg" alt="Chat Now">Chat Now</a></li>
+  </ul>
+  <h1>Booking History</h1>
+</div>
+<div  *ngIf="isLoad" class="loader-overlay">
+  <div class="loader1"></div>
+</div>
+
+<div class="white-board">
+  <div class="month-heading"><img src="/assets/images/nature-people.svg" alt="My Appointments"> My Appointments</div>
+  <div class="clear-div">
+    <div class="row">
+      <div *ngFor="let item of bookinghtyown" class="col-md-6 col-lg-4 col-xl-4">
+        <div class="session-box pt-3">
+          <div class="session-left">
+            <span class="blue-bg" *ngIf="item.ActivityName =='Video Chat'" >&nbsp;</span>
+            <span class="green-bg" *ngIf="item.ActivityName =='Live Chat '">&nbsp;</span>
+            <span class="gry-bg" *ngIf="item.ActivityName =='Face to Face Chat'">&nbsp;</span>
+            <span class="sky-bg" *ngIf="item.ActivityName =='Telephone Chat'">&nbsp;</span>
+            <span class="green-bg" *ngIf="item.ActivityName =='Scheduled Chat '">&nbsp;</span>
+          </div>
+          <div class="session-right">
+            <h3 *ngIf="item.ActivityName=='Video Chat'">Video</h3>
+                <h3 *ngIf="item.ActivityName=='Scheduled Chat '">AccessChat</h3>
+                <h3 *ngIf="item.ActivityName =='Live Chat '">Live Chat</h3>
+                <h3 *ngIf="item.ActivityName =='Telephone Chat'">Phone</h3>
+                <h3 *ngIf="item.ActivityName =='Face to Face Chat'">Face to Face</h3>
+            <p>{{item.startDate}} {{item.startTime}}</p>
+            <p>Counsellor: <strong>{{item.CounsellorName}}</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="white-board">
+  <div class="month-heading"><img src="/assets/images/people.svg" alt="My Appointments"> Family Member's Appointments</div>
+  <div class="clear-div">
+    <div class="row">
+
+      <div *ngFor="let item of bookinghtyfamily" class="col-md-6 col-lg-4 col-xl-4">
+        <div  class="session-box pt-3">
+          <div class="session-left">
+            <span class="blue-bg" *ngIf="item.ActivityName =='Video Chat'" >&nbsp;</span>
+            <span class="green-bg" *ngIf="item.ActivityName =='Live Chat '">&nbsp;</span>
+            <span class="gry-bg" *ngIf="item.ActivityName =='Face to Face Chat'">&nbsp;</span>
+            <span class="sky-bg" *ngIf="item.ActivityName =='Telephone Chat'">&nbsp;</span>
+            <span class="green-bg" *ngIf="item.ActivityName =='Scheduled Chat '">&nbsp;</span>
+          </div>
+          <div class="session-right">
+            <h3 *ngIf="item.ActivityName=='Video Chat'">Video</h3>
+            <h3 *ngIf="item.ActivityName=='Scheduled Chat '">AccessChat</h3>
+            <h3 *ngIf="item.ActivityName =='Live Chat '">Live Chat</h3>
+            <h3 *ngIf="item.ActivityName =='Telephone Chat'">Phone</h3>
+            <h3 *ngIf="item.ActivityName =='Face to Face Chat'">Face to Face</h3>
+            <p>{{item.startDate}} {{item.startTime}}</p>
+            <p>Counsellor: <strong>{{item.CounsellorName}}</strong></p>
+          </div>
+        </div>
+      </div>
+      <div  *ngIf="showquataEmptymsg" >
+        <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+             <div class="modal-body">
+                 <div class="cancel-apntmnt" style='text-align: center;
+                 padding-top: 37px;'>
+                    <img _ngcontent-c10=""  src="/assets/images/cross_icon.svg" class="edit-btn1" (click)="closeModel()">
+                     <p>Your booking quota is finished</p>
+                 </div>
+             </div>
+           </div>
+         </div>
+     </div>
+
+     </div>
+    </div>
+  </div>
+</div>

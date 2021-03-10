@@ -1,0 +1,649 @@
+<!-- <div  *ngIf="isLoad" class="loader-overlay">
+<div class="loader1"></div> -->
+<div *ngIf="isLoad" class="loader-overlay">
+    <div class="loader1"></div>
+</div>
+<div class="group-hd">
+    <ul class="top-bar order-md-1">
+        <li><a href="tel:1800818728"><img src="/assets/images/phone-call.svg" alt="phone call"> 1800 818 728</a>
+        </li>
+        <li><a href="#" routerLink="/dashboard/booking"><img src="/assets/images/calendar-alt.svg" alt="Make a booking">
+                Make a
+                booking</a></li>
+        <li><a (click)="ClickInstantchattop()"><img src="/assets/images/chat.svg"
+                    alt="Chat Now">Chat Now</a></li>
+    </ul>
+    <h1>Make a booking</h1>
+</div>
+
+<form class="msform">
+    <div class="white-board">
+        <ul id="progressbar">
+            <li [ngClass]="{'active': currentFormIndex &lt;= 10}"><span>Counselling for whom?</span></li>
+            <li [ngClass]="{'active': currentFormIndex &gt;= 3}"><span>Type of Counselling</span></li>
+            <li [ngClass]="{'active': currentFormIndex &gt;= 4}"><span>Counsellor Criteria</span></li>
+            <li [ngClass]="{'active': currentFormIndex== 10}"><span>Confirm Appointment</span></li>
+        </ul>
+    </div>
+
+    <fieldset>
+        <div class="setp-1-select">
+            <div *ngIf="show1" class="row abc">
+                <div class="col-6 col-md-3">
+                    <label class="cust-check">
+                        <figure><img src="/assets/images/me.svg" alt="me" /></figure>
+                        <div class="lbl-tetx">Me</div>
+                        <input type="radio" name="radio" [value]="1" [(ngModel)]="toWhom">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="col-6 col-md-3" *ngIf="this.currentUser.FamilyMembersAllowed">
+                    <label class="cust-check">
+                        <figure><img src="/assets/images/family-member.svg" alt="family-member" /></figure>
+                        <div class="lbl-tetx">Family Member</div>
+                        <input type="radio" name="radio" [value]="2" [(ngModel)]="toWhom">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+
+
+            <div [formGroup]="family_form" *ngIf="show2" id="fmember" class="family-member">
+                <h3>Please enter the details of your family member.</h3>
+                <div  *ngIf="!isLessThan18yr" class="form-box">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/login-register/person.svg"
+                                            alt="person"></span>
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="First Name" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="fmFirstName" [ngClass]="{ 'is-invalid': fstname}"> -->
+                                <input type="text" class="form-control" placeholder="First Name"
+                                    formControlName="FirstName">
+
+
+                            </div>
+                            <span class="text-danger" *ngIf="family_form.controls['FirstName'].hasError('required')
+            && (family_form.controls['FirstName'].dirty || family_form.controls['FirstName'].touched)">First Name is
+                                required</span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/login-register/person.svg"
+                                            alt="person"></span>
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="Last Name"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="fmLastName"
+                                    [ngClass]="{ 'is-invalid': lstname}"> -->
+                                <input type="text" class="form-control" placeholder="Last Name"
+                                    formControlName="LastName">
+
+                            </div>
+                            <span class="text-danger" *ngIf="family_form.controls['LastName'].hasError('required')
+            && (family_form.controls['LastName'].dirty || family_form.controls['LastName'].touched)">Last Name is
+                                required</span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/login-register/email.svg"
+                                            alt="Email Address"></span>
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="Email Address"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="fmEmailAddress"
+                                    [ngClass]="{ 'is-invalid': email}"> -->
+                                <input type="text" class="form-control" placeholder="Email"
+                                    formControlName="EmailAddress">
+
+                            </div>
+                            <span class="text-danger" *ngIf="family_form.controls['EmailAddress'].hasError('required')
+            && (family_form.controls['EmailAddress'].dirty || family_form.controls['EmailAddress'].touched)">Email
+                                Address is
+                                required</span>
+
+                                <span class="text-danger" *ngIf="family_form.controls['EmailAddress'].hasError('pattern')
+            && (family_form.controls['EmailAddress'].dirty || family_form.controls['EmailAddress'].touched)">Email must be a valid email address</span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/login-register/phone.svg"
+                                            alt="Phone"></span>
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="Phone"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="fmPhone"
+                                    [ngClass]="{ 'is-invalid': phone}"> -->
+                                <input type="text" pattern="\d+" maxlength="10" minlength="10" (keypress)="matcher($event)"  class="form-control" placeholder="Phone" formControlName="Phone">
+
+                            </div>
+                            <span class="text-danger" *ngIf="family_form.controls['Phone'].hasError('required')
+            && (family_form.controls['Phone'].dirty || family_form.controls['Phone'].touched)">Phone No required</span>
+            <span class="text-danger" *ngIf="family_form.controls['Phone'].hasError('pattern')
+            && (family_form.controls['Phone'].dirty || family_form.controls['Phone'].touched)||family_form.controls['Phone'].hasError('minlength')">Phone No must be a number 10 digits.</span>
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/login-register/phone.svg"
+                                            alt="Phone"></span>
+                                </div>
+                                <input type="text" class="form-control" formControlName="dateofbirth"
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false,adaptivePosition: true}" #dp="bsDatepicker" bsDatepicker
+
+                                    [maxDate]="today"  [(bsValue)]="bsValue" placeholder="Date Of Birth" [ngClass]="{ 'is-invalid': dob}">
+                                <!-- <input type="text" class="form-control" placeholder="Phone"
+                                    formControlName="Phone"> -->
+
+                                <!-- <input type="text" class="form-control" placeholder="Phone" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="fmDOB"> -->
+                            </div>
+                            <span class="text-danger" *ngIf="family_form.controls['dateofbirth'].hasError('required')
+                         && (family_form.controls['dateofbirth'].dirty || family_form.controls['dateofbirth'].touched)">Date Of Birth is
+                                required</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isLessThan18yr" class="form-box">
+                    <h2 class="mb-4">Below 18 years Form</h2>
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="show3">
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <label class="cust-check">
+                            <figure><img src="/assets/images/face-to-face.svg" alt="Face-to-face" /></figure>
+                            <div class="lbl-tetx">Face-to-face</div>
+                            <input type="radio" name="radio" [value]="1" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="counsellingType">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="cust-check">
+                            <figure><img src="/assets/images/phone.svg" alt="Phone" /></figure>
+                            <div class="lbl-tetx">Phone</div>
+                            <input type="radio" name="radio" [value]="2" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="counsellingType">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="cust-check">
+                            <figure><img src="/assets/images/video-chat.svg" alt="Video" /></figure>
+                            <div class="lbl-tetx">Video</div>
+                            <input type="radio" name="radio" [value]="3" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="counsellingType">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="cust-check">
+                            <figure><img src="/assets/images/text-chat.svg" alt="AccessChat" /></figure>
+                            <div class="lbl-tetx">AccessChat</div>
+                            <input type="radio" name="radio" [value]="4" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="counsellingType">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="show4" class="multi-step">
+                <div class="choose-profile">
+                    <h2 class="mb-4">Choose the profile of your counsellor.</h2>
+
+                    <div class="ga-column">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ga-main">
+                                    <h2>Gender</h2>
+                                    <div class="form-group">
+                                        <label class="radio-btn">Male
+                                            <input type="radio" name="radio" [value]="1"
+                                                [ngModelOptions]="{standalone: true}" [(ngModel)]="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio-btn">Female
+                                            <input type="radio" name="radio" [value]="2"
+                                                [ngModelOptions]="{standalone: true}" [(ngModel)]="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio-btn">No preference
+                                            <input type="radio" name="radio" [value]="3"
+                                                [ngModelOptions]="{standalone: true}" [(ngModel)]="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ga-main">
+                                    <h2>Age</h2>
+                                    <div class="form-group">
+                                        <label class="check-box">35yrs and under
+                                            <input type="checkbox" [checked]="isBelow35"
+                                                (change)="isBelow35 = !isBelow35">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="check-box">35yrs to 50yrs
+                                            <input type="checkbox" [checked]="isAbove35"
+                                                (change)="isAbove35 = !isAbove35">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="check-box">50yrs+
+                                            <input type="checkbox" [checked]="isAbove50"
+                                                (change)="isAbove50 = !isAbove50">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="show5" class="multi-step">
+                <div class="choose-profile max-width-full" style="max-width: 100%;">
+                    <h2 class="mb-4">If you’d like a counsellor with a specific speciality, please select it below. If not, we recommend skipping this step to see all available counsellors.</h2>
+                    <div class="ga-column">
+                        <div class="ga-specialty">
+                            <div class="row">
+                                <div class="form-group col-md-3" *ngFor="let credentiallists of credentiallist;">
+                                    <label class="check-box">{{this.credentiallists.CredentialName}}
+                                        <input type="checkbox" (change)="onChange(this.credentiallists.CredentialId, $event.target.checked)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <!-- <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="check-box">Specialty 1
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="show6" class="multi-step">
+                <div class="counsellor-img-box">
+
+                    <div class="row">
+                        <div *ngIf="professionals?.length===0">
+                            We’re sorry, there are currently no available counsellors with all of the filters that you have requested. We recommend that you remove some of the filters and try again.
+                        </div>
+                        <div *ngFor="let prof of professionals" class="col-md-6 col-lg-4" style="padding-bottom: 15px;">
+                            <div class="counsellor-sort-info">
+                                <figure>
+                                    <img [src]="prof.professionalPhoto"
+                                        onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"
+                                        *ngIf="prof.professionalPhoto!=null" style="height: 222px">
+                                    <img src="/assets/images/defaultprofile_b.png" alt="User image"
+                                        *ngIf="((prof.professionalPhoto==null)||(prof.professionalPhoto==undefined))">
+                                    <!-- <img src="/assets/images/counsellor-criteria.png"> -->
+                                    <div class="next-prev-btn text-center cnslr-overlay">
+                                        <input type="button" name="next" (click)="onBook(prof)"
+                                            class="next btn appoint-btn" value="Book Now" />
+                                    </div>
+                                </figure>
+                                <h3>{{prof.professionalName}}</h3>
+                                <p>{{prof.Specialities}}</p>
+                                <span>{{prof.Gender}}, {{prof.Location}}</span>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 col-lg-4">
+                            <div class="counsellor-sort-info">
+                                <figure>
+                                    <img src="/assets/images/counsellor-criteria.png">
+                                    <div class="next-prev-btn text-center cnslr-overlay">
+                                        <input type="button" name="next" (click)="onBook(2)"  class="next btn appoint-btn" value="Book Now" />
+                                    </div>
+                                </figure>
+                                <h3>Sarah Williams</h3>
+                                <p>Rehabilitation, Marriage, mental health.</p>
+                                <span>Female, NSW</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="counsellor-sort-info">
+                                <figure>
+                                    <img src="/assets/images/counsellor-criteria.png">
+                                    <div class="next-prev-btn text-center cnslr-overlay">
+                                        <input type="button" name="next" (click)="onBook(3)" class="next btn appoint-btn" value="Book Now" />
+                                    </div>
+                                </figure>
+                                <h3>Sarah Williams</h3>
+                                <p>Rehabilitation, Marriage, mental health.</p>
+                                <span>Female, NSW</span>
+                            </div>
+                        </div>  -->
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="show7" class="confirm-appointment">
+                <div class="apmnt-info">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="counsellor-sort-info">
+                                <figure>
+                                    <img [src]="professionalDetails[0].professionalPhoto"
+                                        onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"
+                                        *ngIf="professionalDetails[0].professionalPhoto!=null"
+                                        style="width: 310px;height: 222px">
+                                    <img src="/assets/images/defaultprofile_b.png" alt="User image"
+                                        *ngIf="((professionalDetails[0].professionalPhoto==null)||(professionalDetails[0].professionalPhoto==undefined))"
+                                        style="width: 310px;height: 222px">
+                                    <!-- <img src="/assets/images/counsellor-criteria.png"> -->
+                                </figure>
+                                <h3>{{professionalDetails[0].professionalName}}</h3>
+                                <p>{{professionalDetails[0].Specialities}}</p>
+                                <span>{{professionalDetails[0].Gender}}, {{professionalDetails[0].Location}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="date-sel">
+                                <ul>
+                                    <li *ngFor="let item of professionalDates; index as d"
+                                        (click)="onDateSelect(item,d,$event)"><a class="active"
+                                            href="javascript:void(0)">{{item}}</a></li>
+                                    <!-- <li><a href="javascript:void(0)">Wednesday, Jan 7th, 2020</a></li>
+                                    <li><a href="javascript:void(0)">Thursday, Jan 8th, 2020</a></li>
+                                    <li><a href="javascript:void(0)">Friday, Jan 9th, 2020</a></li>
+                                    <li><a href="javascript:void(0)">Monday, Jan 12th, 2020</a></li>
+                                    <li><a href="javascript:void(0)">Tuesday, Jan 13th, 2020</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="time-sel">
+                                <p *ngIf="selectedDate!=null">{{selectedDate}} (AEDT) </p>
+                                <ul>
+                                    <li *ngFor="let timeslot of professionalTimes; index as t"
+                                        (click)="onTimeSelect(timeslot.startTime,t,$event)"><a
+                                            href="javascript:void(0)">{{timeslot.startTime}}</a></li>
+                                    <!-- <li><a href="javascript:void(0)">2:00 pm</a></li>
+                                    <li><a href="javascript:void(0)">3:00 pm</a></li>
+                                    <li><a href="javascript:void(0)">4:00 pm</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="show8" class="confirm-appointment">
+                <div class="appointment-info">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="counsellor-sort-info">
+                                <figure>
+                                    <img [src]="professionalDetails[0].professionalPhoto"
+                                        onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"
+                                        *ngIf="professionalDetails[0].professionalPhoto!=null"
+                                        style="width: 310px;height: 222px">
+                                    <img src="/assets/images/defaultprofile_b.png" alt="User image"
+                                        *ngIf="((professionalDetails[0].professionalPhoto==null)||(professionalDetails[0].professionalPhoto==undefined))"
+                                        style="width: 310px;height: 222px">
+                                    <!-- <img src="/assets/images/counsellor-criteria.png"> -->
+                                </figure>
+                                <h3>{{professionalDetails[0].professionalName}}</h3>
+                                <p>{{professionalDetails[0].Specialities}}</p>
+                                <span>{{professionalDetails[0].Gender}}, {{professionalDetails[0].Location}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="apnmt-details">
+                                <span *ngIf="isConfirmed" class="confirm-check"><img
+                                        src="/assets/images/checked.svg"></span>
+                                <h3>Appointment Details</h3>
+                                <ul>
+                                    <li>Date: {{selectedDate}}</li>
+                                    <li>Time: {{selectedTime}} (AEDT)</li>
+                                    <li *ngIf="selectedCounsellingType=='Scheduled Chat'">Mode: AccessChat</li>
+                                    <li *ngIf="selectedCounsellingType=='Telephone'">Mode: Phone</li>
+                                    <li *ngIf="selectedCounsellingType=='Video'">Mode: Video</li>
+                                    <li *ngIf="selectedCounsellingType=='Face to Face'">Mode: Face to Face</li>
+                                </ul>
+                                <p>Please make sure you are on time. You can reschedule your appointment up to 24 hours
+                                    before your appointment time afterwhich your booking will be allocated towards your
+                                    counselling session quota. <b>Your appointment time is in AEDT.</b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <a *ngIf="!isConfirmed" href="javascript:void(0)" (click)="confirmAppointment()"
+                                class="btn appoint-btn">Confirm
+                                Appointment</a>
+                            <div *ngIf="isConfirmed" class="confirm-appoint">
+                                <a href="javascript:void(0)" class="btn appoint-btn cnfirm-btn">Appointment
+                                    Confirmed</a>
+                                <ul>
+                                    <li>You will receive an email shortly with your appointment booking confirmation.
+                                    </li>
+                                    <li *ngIf="familyflowdesignshow">You will be redirected in {{countershow}} seconds to complete your consent form ...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="next-prev-btn">
+                        <input type="button" name="previous" class="btn appoint-btn" value="Back"  onClick="showPrev(this)"/>
+                    </div>     -->
+                </div>
+            </div>
+            <div *ngIf="show10">
+                <form [formGroup]="employerGroup" (ngSubmit)="login()">
+                <div class="counsellor-form">
+                    <div class="p-3">
+                        <p>Hi {{currentUser.FullName}}, in order for your counsellor to be able to conduct your session, they'll need to have this consent form completed. Please take a minute to submit it.</p>
+                    </div>
+                    <div class="counsellor-info-form">
+                        <p><strong>Welcome</strong> and thank you for contacting AccessEAP, the provider of your organisation's Employee Assistance Program (EAP).  It is our aim to provide you with a professional assessment, appropriate counselling, and where necessary, a referral to meet your needs.  Your counsellor will provide assistance and support for a personal or a work-related issue.  This could involve from one to six hours counselling, depending on the agreement we have with your employer.</p>
+                        <p>As part of providing a counselling service to you the counsellor will need to collect and record personal information from you that is relevant to your current situation.  This information will be a necessary part of the assessment and treatment that is conducted by your counsellor.  You may view and have a copy of the material recorded in your file upon request, subject to the exceptions in Australian Privacy Principle 12.</p>
+                        <p>Prior to your first counselling session we ask you to complete an Intake Questionnaire and at the end of your counselling we will invite you, via email, to complete an online evaluation of the service you have received.  You do not have to complete these forms, but we would like you to, because it helps us provide a good quality service.</p>
+
+                        <h4>CONFIDENTIALITY GUARANTEED</h4>
+
+                        <p>AccessEAP guarantees confidentiality of all sessions, unless written permission is given by you to (a) discuss information with another professional, family member, work colleague or employer or (b) provide a written report to another professional or agency. However, confidentiality may be overridden in circumstances where there is a current or prospective serious risk of injury, either physical or emotional, to any person including yourself, or if a court issues a subpoena. All information you provide on the Intake Questionnaire and the Evaluation Form are also confidential.  Only statistical data is reported back to Companies and Organisations, and never in a way that identifies individuals.</p>
+
+                        <h4>KEEPING APPOINTMENTS</h4>
+                        <p>It is important to give at least 24 hours notice if you are unable to keep an appointment so that another client may be able to use that time period.  If you do not give 24 hours notice or do not attend for a counseling session, this session is still included in the number allocated by your employer.  You will therefore forfeit this session.</p>
+
+
+                        <!-- <form> -->
+                            <p><span class="sml">I</span> <input type="text" style="text-transform:uppercase" class="form-control name-feld" formControlName="FullName" [ngClass]="{ 'is-invalid': employerSubmitted && fe.FullName.errors }" > (Insert Name)</p>
+                            <p><span class="sml">of,</span> <input type="text" style="text-transform:uppercase" class="form-control of-field" formControlName="Address" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Address.errors }"> (Insert Address)</p>
+                            <p>have read and understood the above information.  I agree to these conditions for the counselling service provided by AccessEAP.</p>
+                            <p>An emergency contact person for me is:  <input type="text" class="form-control emergency-field" formControlName="EmergencyContactPerson" [ngClass]="{ 'is-invalid': employerSubmitted && fe.EmergencyContactPerson.errors }"></p>
+                            <p class="f-input">Phone: <input type="text"  maxlength="10" minlength="10" class="form-control phone-field" formControlName="Phone" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Phone.errors }" onlyNumber></p>
+                            <p class="s-input">Signature: <input type="text" class="form-control sign-field" formControlName="Signature" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Signature.errors }"></p>
+                            <p class="t-input">Date: <input class="form-control date-field" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false,adaptivePosition: true }" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" type="text" formControlName="CreatedDate" [ngClass]="{ 'is-invalid': employerSubmitted && fe.CreatedDate.errors }" [attr.disabled]=true></p>
+                            <p>Please note: If, after reading this page you are at all unsure of what is written, please discuss it with the counsellor.</p>
+                        <!-- </form>                          -->
+                    </div>
+                     <input type="submit" name="next" class="btn appoint-btn mt-4" value="Submit" style="margin-left: 30px;" />
+                </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- <div class="next-prev-btn">
+          <a href="#" class="btn appoint-btn cust-back" onClick="$(this).hide();$('.abc').show();$('#fmember').hide();" style="display:none;">Back</a>
+            <input type="button" name="next" class="next btn appoint-btn" value="Next" />
+        </div>                 -->
+        <div class="next-prev-btn" *ngIf="btnnextbutton">
+            <button
+                *ngIf="(currentFormIndex==2 || currentFormIndex==3 || currentFormIndex==4 ||currentFormIndex==5 || currentFormIndex==6 || currentFormIndex==8 || currentFormIndex==9 ||currentFormIndex ==7) && this.currentUser.FamilyMembersAllowed"
+                type="button" class="btn appoint-btn cust-back" (click)="onBack(currentFormIndex)">Back</button>
+                <button
+                *ngIf="(currentFormIndex==2 ||  currentFormIndex==4 ||currentFormIndex==5 || currentFormIndex==6 || currentFormIndex==8 || currentFormIndex==9 ||currentFormIndex ==7) && !this.currentUser.FamilyMembersAllowed"
+                type="button" class="btn appoint-btn cust-back" (click)="onBack(currentFormIndex)">Back</button>
+            <button *ngIf="currentFormIndex!=7 && currentFormIndex!=9" type="button" class="next btn appoint-btn"
+                (click)="onNext(currentFormIndex)">Next</button>
+            <!-- <a *ngIf="currentFormIndex==2 || currentFormIndex==3 || currentFormIndex==4 ||currentFormIndex==5 || currentFormIndex==7 || currentFormIndex==8" href="javascript:void(0)" class="appoint-btn cust-back" (click)="onBack(currentFormIndex)">Back</a>
+                <input type="button" name="next" class="next appoint-btn" value="Next" (click)="onNext(currentFormIndex)" /> -->
+
+            <a *ngIf="show4 || show5" class="skip-step" href="javascript:void(0)"
+                (click)="onSkip(currentFormIndex)">Skip this step</a>
+        </div>
+        <div *ngIf="NewtimeslotBooking">
+          <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="cancel-apntmnt">
+                    <p style="text-align: center !important">Are you sure! you want to make new time slot ?</p>
+                    <div class="btn-grp" style="width: 100% !important; text-align: center;">
+                      <a href="javascript:;" (click)="NewtimeslotBookingOk()" class="btn appoint-btn" data-dismiss="modal">Ok</a>
+
+                      <a href="javascript:;" (click)="NewtimeslotBookingCancle()" class="btn appoint-btn" data-dismiss="modal" >Cancel</a>
+                     </div>
+                    <!-- <div class="btn-grp" style="width: 48% !important;">
+                                   <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+                               </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="ResevationtimeoutFlag">
+          <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="cancel-apntmnt">
+                    <p style="text-align: center !important">{{Resrvationtimeout}}</p>
+                    <div class="btn-grp" style="width: 100% !important; text-align: center;">
+                      <a href="javascript:;" (click)="Resrvationtimeoutok()" class="btn appoint-btn" data-dismiss="modal">Ok</a>
+
+
+                     </div>
+                    <!-- <div class="btn-grp" style="width: 48% !important;">
+                                   <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+                               </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div  *ngIf="showquataEmptymsg" >
+          <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+           <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content">
+               <div class="modal-body">
+                   <div class="cancel-apntmnt" style='text-align: center;
+                   padding-top: 37px;'>
+                      <img _ngcontent-c10=""  src="/assets/images/cross_icon.svg" class="edit-btn1" (click)="closeModel()">
+                       <p>Your booking quota is finished</p>
+                       <!-- <div class="btn-grp">
+                           <a href="javascript:;" (click)="Yesmodelchatend()" class="btn appoint-btn" data-dismiss="modal">Yes</a>
+                       </div> -->
+                       <!-- <div class="btn-grp">
+                          <a href="javascript:;" class="cancel-text-link" (click)="closeModel()">Cancel</a>
+                      </div> -->
+                   </div>
+               </div>
+             </div>
+           </div>
+       </div>
+
+       </div>
+
+
+       <div  *ngIf="ShowfamilyMembersUnder18Allowed" >
+        <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+             <div class="modal-body">
+                 <div class="cancel-apntmnt" style='text-align: center;
+                 padding-top: 37px;'>
+                    <img _ngcontent-c10=""  src="/assets/images/cross_icon.svg" class="edit-btn1" (click)="closeModel18Allowed()">
+                     <p>Apologies. You can't make a booking for a family member who under 18 old.</p>
+                 </div>
+             </div>
+           </div>
+         </div>
+     </div>
+
+     </div>
+    </fieldset>
+</form>
+<toaster-container [toasterconfig]="config">
+</toaster-container>

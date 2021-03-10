@@ -1,0 +1,32 @@
+.messageChat{
+    font-family: 'HelveticaNeueLTStd-Roman';
+    color: #4D4D4F;
+    font-weight: 400;
+    margin-top: 13%;
+    text-align: center;
+}
+.black-dot span{
+    background: #000000;
+}
+.right-side {
+    float: left;
+    width: calc(100% - 70px);
+    padding: 20px 40px !important;
+}
+.chatroomfrist{
+    margin-top: 4%;
+    margin-left: 9%;
+}
+.cahtroommsg{
+    margin-top: 7%;
+    margin-left: 23%;
+    background-color: #f1f1f1;
+}
+.disbleclass{
+        cursor: not-allowed;
+        pointer-events: none;    
+}
+.btndisbled{
+  background:  #dddddd;
+}
+

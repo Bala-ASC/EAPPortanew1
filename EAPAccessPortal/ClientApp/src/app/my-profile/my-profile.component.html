@@ -1,0 +1,198 @@
+<div class="group-hd">
+    <ul class="top-bar order-md-1">
+        <li><a href="tel:1800818728"><img src="/assets/images/phone-call.svg" alt="phone call"> 1800 818 728</a></li>
+        <li><a  (click)="makebooking()"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> Make a booking</a></li>
+        <li><a (click)="ClickInstantchattop()"><img src="/assets/images/chat.svg" alt="Chat Now">Chat Now</a></li>
+    </ul>
+    <h1>My Profile</h1>
+</div>
+<div  *ngIf=isLoad class="loader-overlay">
+    <div class="loader1"></div>
+</div>
+
+<form [formGroup]="registerForm"  (ngSubmit)="updateprofile()">
+    <div class="my-profile">
+      <div class="row" *ngIf="user">
+          <div class="col-md-6 col-lg-4">
+            <div class="form-group">
+                <img _ngcontent-c10=""  *ngIf="(isRequired==false)&&(removeImage==true)" src="/assets/images/cross_icon.svg" class="edit-btn" (click)="removeimage()">
+                <label for="file-input1" *ngIf="(isRequired==false)&&((removeImage==false))"><img _ngcontent-c10="" src="/assets/images/edit_pen.svg" class="edit-btn"></label>
+                <input id="file-input1" type="file" (change)="selectPhoto1($event.target.files)" style="display: none;"/>
+                <img [src]="user.ProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"  class="img-thumnail"  *ngIf="user.ProfilePhoto!=null">
+                <img src="/assets/images/defaultprofile_b.png" alt="User image" class="img-thumnail" *ngIf="((user.ProfilePhoto==null)||(user.ProfilePhoto==undefined))">
+            </div>
+              <div class="form-group app-field">
+                  <label>First Name:</label>
+                  <!-- <input type="text" [ngModelOptions]="{standalone: true}" class="form-control"  [(ngModel)]="user.FirstName"  placeholder="First Name" [readonly]="isRequired ? true : null"  /> -->
+                  <input type="text"  class="form-control" placeholder="First Name"
+                  formControlName="FirstName" [ngClass]="{ 'is-invalid': employerSubmitted && fe.FirstName.errors }" [readonly]="isRequired ? true : null"  id="FirstName"/>
+              </div>
+              <div class="form-group app-field">
+                  <label>Last Name:</label>
+                  <!-- <input type="text" [ngModelOptions]="{standalone: true}" class="form-control"  [(ngModel)]="user.LastName"  placeholder="Last Name" [readonly]="isRequired ? true : null"   /> -->
+                  <input type="text"  class="form-control" placeholder="Last Name"
+                                    formControlName="LastName" [ngClass]="{ 'is-invalid': employerSubmitted && fe.LastName.errors }" [readonly]="isRequired ? true : null"  id="LastName" />
+              </div>
+              <div class="form-group app-field">
+                  <label>Email:</label>
+                  <input type="text" [ngModelOptions]="{standalone: true}"
+                  class="form-control" [(ngModel)]="user.Email" placeholder="Email" readonly />
+
+              </div>
+
+
+
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+
+            <div class="form-group app-field">
+                <label>Gender:</label>
+                <!-- <input type="text" [ngModelOptions]="{standalone: true}" class="form-control"  [(ngModel)]="user.LastName"  placeholder="Last Name" [readonly]="isRequired ? true : null"   /> -->
+                <select (change)="onchangeGender($event)"  class="custom-select form-control" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Gender.errors, 'arrowmark': isRequired}" formControlName="Gender" [attr.disabled]="isRequired ? true : null">
+                    <option value="">Please Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-Binary">Non-Binary</option>
+                    <option value="Other/Prefer not to say">Other/Prefer not to say</option>
+                </select>
+            </div>
+            <div class="form-group app-field">
+                <label>City:</label>
+                <!-- <input type="text" [ngModelOptions]="{standalone: true}" class="form-control"  [(ngModel)]="user.LastName"  placeholder="Last Name" [readonly]="isRequired ? true : null"   /> -->
+                <input type="text"  class="form-control" placeholder="City"
+                                  formControlName="City" [ngClass]="{ 'is-invalid': employerSubmitted && fe.City.errors }" [readonly]="isRequired ? true : null"   id="City" />
+            </div>
+            <div class="form-group app-field">
+                <label>State:</label>
+                <!-- <input type="text" [ngModelOptions]="{standalone: true}" class="form-control"  [(ngModel)]="user.LastName"  placeholder="Last Name" [readonly]="isRequired ? true : null"   /> -->
+                <input type="text"  class="form-control" placeholder="State"
+                                  formControlName="State" [ngClass]="{ 'is-invalid': employerSubmitted && fe.State.errors }" [readonly]="isRequired ? true : null"  id="State"  />
+            </div>
+
+              <div class="form-group app-field">
+                  <label>Phone:</label>
+                  <input type="text" pattern="\d+" maxlength="10" minlength="10" (keypress)="matcher($event)" class="form-control" placeholder="Mobile No"
+                                    formControlName="MobileNo" [ngClass]="{ 'is-invalid': employerSubmitted && fe.MobileNo.errors }" [readonly]="isRequired ? true : null" id="MobileNo"/>
+                  <!-- <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.MobileNo"   placeholder="Phone" [readonly]="isRequired ? true : null" />    -->
+                  <div *ngIf="employerSubmitted && fe.MobileNo.errors" class="invalid-feedback"> Phone No must be a number and 10 digits.</div>
+
+                </div>
+                <div class="form-group app-field">
+                    <label>DOB:</label>
+                      <input type="datetime" class="form-control" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false,adaptivePosition: true}" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" placeholder="Date Of Birth"
+                       placeholder="Date of birth" [maxDate]="maxDate"  formControlName="DateOfBirth" [ngClass]="{ 'is-invalid': employerSubmitted && fe.DateOfBirth.errors }" [attr.disabled]="isRequired ? true : null" id="Dob" />
+                </div>
+
+
+              <!-- <span *ngIf=invalidpostcode style="color:red">
+                post code must be a number and maximum 4 digit.</span> -->
+
+
+          </div>
+          <div class="col-md-6 col-lg-4">
+
+            <div class="form-group app-field">
+                <label>Post Code:</label>
+                <!-- <input type="text" class="form-control" (keypress)="numberOnly($event)" name="postcode" [(ngModel)]="user.PostCode" #postcode="ngModel" [ngClass]="{ 'is-invalid': f.submitted && postcode.invalid }" placeholder="Post Code" [readonly]="isRequired ? true : null"/>    -->
+                <input type="text" pattern="\d+" class="form-control" placeholder="Postcode" maxlength="4" (keypress)="matcher($event)"
+                formControlName="Postcode" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Postcode.errors }" [readonly]="isRequired ? true : null" />
+        <div *ngIf="employerSubmitted && fe.Postcode.errors" class="invalid-feedback"> post code must be a number and maximum 4 digit.</div>
+            </div>
+            <div class="form-group app-field">
+                <label>Organisation:</label>
+                <input type="text" [ngModelOptions]="{standalone: true}" class="form-control"  [(ngModel)]="user.OrganisationName"  placeholder="Organisation" readonly />
+            </div>
+            <div *ngIf=txtgrpbox class="form-group app-field">
+                <label>Group:</label>
+                <div>
+                    <select class="form-control"  (change)="onGroupChange()" placeholder="Group"
+                    formControlName="Groupselect" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Groupselect.errors, 'arrowmark': isRequired }" [attr.disabled]="isRequired ? true : null">
+                        <option  value="">Please select Group</option>
+                        <option *ngFor="let group of groups" value="{{group.GroupId}}">
+                            {{group.GroupName}}
+                        </option>
+                    </select>
+
+              </div>
+
+            </div>
+            <div *ngIf=txtdivbox class="form-group app-field">
+                <label>Division:</label>
+                <div>
+                    <select class="form-control" id="Divisionselect" placeholder="Division" (change)="onDivisionChange()"
+                    formControlName="Divisionselect" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Divisionselect.errors, 'arrowmark': isRequired }" [attr.disabled]="isRequired ? true : null">
+                        <option selected disabled value="">Please select Division</option>
+                        <option *ngFor="let division of divisions" value="{{division.DivisionId}}">
+                            {{division.DivisionName}}
+                        </option>
+                    </select>
+
+                </div>
+            </div>
+            <div *ngIf=txtdeptbox class="form-group app-field">
+                <label>Department:</label>
+                <div>
+                    <select class="form-control" id="Departmentselect" name="Departmentselect" placeholder="Departments"
+                    formControlName="Departmentselect" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Departmentselect.errors, 'arrowmark': isRequired }" [attr.disabled]="isRequired ? true : null">
+                        <option selected disabled value="">Please select Department</option>
+                        <option *ngFor="let department of departments" value="{{department.DepartmentId}}">
+                            {{department.DepartmentName}}
+                        </option>
+                    </select>
+
+                </div>
+
+            </div>
+
+          </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" value={{btntextvalue}} class="btn appoint-btn">
+        <input type="button" value="Logout" class="btn" style="margin-left: 100px;"  data-toggle="modal" data-target="#logout-Appointment" >
+      </div>
+      <div class="modal fade small-modal" id="logout-Appointment">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+                <div class="cancel-apntmnt">
+                    <p>Are you sure you want to log out?</p>
+                    <div class="btn-grp">
+                        <a (click)="logOut()" class="btn appoint-btn" data-dismiss="modal">Yes. Log me out</a>
+                    </div>
+                    <div class="btn-grp">
+                        <a href="#" class="cancel-text-link" data-dismiss="modal">Cancel</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div  *ngIf="showquataEmptymsg">
+        <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+             <div class="modal-body">
+                 <div class="cancel-apntmnt" style='text-align: center;
+                 padding-top: 37px;'>
+                    <img _ngcontent-c10=""  src="/assets/images/cross_icon.svg" class="edit-btn1" (click)="closeModel()">
+                     <p>Your booking quota is finished</p>
+                     <!-- <div class="btn-grp">
+                         <a href="javascript:;" (click)="Yesmodelchatend()" class="btn appoint-btn" data-dismiss="modal">Yes</a>
+                     </div> -->
+                     <!-- <div class="btn-grp">
+                        <a href="javascript:;" class="cancel-text-link" (click)="closeModel()">Cancel</a>
+                    </div> -->
+                 </div>
+             </div>
+           </div>
+         </div>
+     </div>
+
+     </div>
+
+    </div>
+    </form>
+
+    <toaster-container [toasterconfig]="config">
+    </toaster-container>

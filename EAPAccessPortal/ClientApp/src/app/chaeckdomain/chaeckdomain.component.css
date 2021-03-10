@@ -1,0 +1,17 @@
+.is-invalid{
+    border: 0.5px solid red!important;
+    /* border-bottom-style:0.5px solid red!important; */
+} 
+@media all and (max-width:1280px){
+    .right-image {
+        width: 72%;
+        right: -70px;
+    }
+}
+.edit-btn1{
+    left: 470px;
+    top: 5px;
+    position: absolute;
+    width:25px;
+    height: 25px;
+  }

@@ -1,0 +1,49 @@
+﻿using EAPAccess.Entities.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Net;
+using System.Threading.Tasks;
+
+namespace EAPAccess.Common.Classes
+{
+    public class ExceptionMiddleware
+    {
+        private readonly RequestDelegate _next;     
+        private readonly ILogger<ExceptionMiddleware> _logger;
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        {
+            _logger = logger;
+            _next = next;
+        }
+        public async Task InvokeAsync(HttpContext httpContext)
+        {
+            try
+            {
+                await _next(httpContext);
+            }
+            catch (Exception ex)
+            {
+                if (ex is InvalidOperationException && ex.Message.StartsWith("The SPA default page middleware could not return the default page"))
+                {
+                }
+                else
+                {
+                    _logger.LogError($"Something went wrong: {ex}");
+                    await HandleExceptionAsync(httpContext, ex);
+                }
+            }
+        }
+
+        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;          
+            return context.Response.WriteAsync(new ErrorDetails()
+            {
+                StatusCode = context.Response.StatusCode,
+                Message = $"Something went wrong, please contact your administrator with this info - {exception.Message}"
+            }.ToString());
+        }     
+    }
+}

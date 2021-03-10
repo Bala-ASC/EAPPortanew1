@@ -1,0 +1,169 @@
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link href="assets/css/custom.css" rel="stylesheet"> -->
+<div *ngIf="isLoad" class="loader-overlay">
+  <div class="loader1"></div>
+</div>
+<div class="white-bg">
+<div class="home">
+  <div class="home-header">
+    <div class="container">
+      <a href="index.html" class="logo-img"><img style="max-width:150px;" src="/assets/images/logo.svg" alt="AccessEAP People in focus" title="AccessEAP People in focus"></a>
+      <div class="login-signup">
+        <a class="signup">Register <img src="/assets/images/md-person.svg" alt="Signup"></a>
+        <a routerLink="/login" class="login-btn">Login</a>
+      </div>
+      <p style="color:#153472">Online Wellbeing</p>
+    </div>
+  </div>
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <div class="home-content">
+      <div class="container">
+        <div class="home-hero">
+          <h1>We help you<br><span>live</span> to the fullest.</h1>
+  
+        </div>
+
+        <div class="join-us">
+          <div class="get-started" [ngStyle]="{'border': submitted && f.email.errors? '0.5px solid red':''}">
+            <span><img src="/assets/images/mail.svg" alt="mail"></span>           
+          <!-- <input id="InputToFocus"  placeholder="Email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"   />
+                      -->
+                      <input type="text" id="InputToFocus" formControlName="email" class="form-control" 
+                      placeholder="Enter your email address" />
+            <button class="btn submit-btn">Get Started</button>
+          </div>
+          
+          <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div> -->
+          
+        </div>
+
+
+      </div>
+    </div>
+  </form>
+  <div class="book-descr">
+    <p>You can use this system to book future EAP appointments as provided by your</p> 
+    <p>employer. If you would like to talk to a counsellor now, or for any help with this</p> 
+    <p>system, please call us on<a href="tel:1800818728"> 1800 818 728</a>.</p>
+    <br>
+    <p>If you are experiencing thoughts of harming yourself or someone else, please call</p>
+      <p> Emergency Services<a href="tel:000"> (000)</a> or the Mental Health Team at your local hospital. You can</p> 
+       <p>also contact Lifeline on<a href="tel:131114"> 13 11 14</a> to speak with a counsellor 24/7.</p>
+      </div>
+  <div class="book-counsellor">
+    <div class="container">
+      <div class="book-hd-group">
+        <h2>Book a counsellor in 3 easy steps</h2>
+      </div>
+     
+      <div class="bcnlr-main">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="book-column up-arrpw">
+              <figure><img src="/assets/images/event-confirm.svg" alt="Convenient" /></figure>
+              <h3>Convenient</h3>
+              <p>Choose the date and time that suits you and mode of counselling.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="book-column down-arrpw">
+              <figure><img src="/assets/images/right-person.svg" alt="Your Choice" /></figure>
+              <h3>Your Choice</h3>
+              <p>Filter Counsellors according to your preferences</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="book-column">
+              <figure><img src="/assets/images/right-state-mind.svg" alt="Confidential" /></figure>
+              <h3>Confidential</h3>
+              <p>Speak to your counsellor in 100% private and comfortable environment.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="book-start">
+          <p>Join thousands of people who get access to our counselling services every month</p>
+          <a href="#" class="appoint-btn">Get Started Today</a>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="row">
+          <div class="col-md-12 col-lg-5 f-left">
+            <a href="#" class="f-logo"><img src="/assets/images/footer-logo.png" alt="AccessEAP People in focus" title="AccessEAP People in focus"></a>
+            <p>Our mission is to create thriving workplaces, we partner with each customer to promote, recognise and
+              effectively manage the mental health of every employee. This enables our support for vulnerable families
+              through profit for purpose programs.</p>
+          </div>
+          <div class="col-md-12 col-lg-7">
+            <div class="row">
+              <div class="col-6 col-md-4 footer-nav-widget">
+                <h3>About</h3>
+                <ul>
+                  <li><a href="#">Contact us</a></li>
+                  <li><a href="#">Our Board</a></li>
+                  <li><a href="#">Our People</a></li>
+                  <li><a href="#">Quality Assured</a></li>
+                  <li><a href="#">Profit for Purpose</a></li>
+                  <li><a href="#">Our Partners</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Testimonials</a></li>
+                </ul>
+              </div>
+              <div class="col-6 col-md-4 footer-nav-widget">
+                <h3>Services</h3>
+                <ul>
+                  <li><a href="#">Individuals in focus</a></li>
+                  <li><a href="#">Managers in focus</a></li>
+                  <li><a href="#">Organisations in focus</a></li>
+                  <li><a href="#">Training in focus</a></li>
+                  <li><a href="#">Our service locations</a></li>
+                  <li><a href="#">FAQs</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4 footer-nav-widget">
+                <h3>Resources</h3>
+                <ul>
+                  <li><a href="#">Newsletter</a></li>
+                  <li><a href="#">AccessEAP in the media</a></li>
+                  <li><a href="#">AccessEAP Blog</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Useful Links</a></li>
+                  <li><a href="https://www.accesseap.com.au/resources/privacy-policy">Privacy Policy</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copy-txt">
+        <div class="order-md-1 f-social">
+          <a href="#" target="_blank"><img src="/assets/images/linkedin.svg" alt="AccessEAP"></a>
+          <a href="#" target="_blank"><img src="/assets/images/twitter.svg" alt="AccessEAP"></a>
+        </div>
+        <p>Copyright © AccessEAP. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<toaster-container [toasterconfig]="config">
+</toaster-container>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script>
+  $(".signup").click(function () {
+    $('#InputToFocus').focus();
+    $(".get-started").addClass("intro");
+    $('html, body').animate({ scrollTop: 100 }, 'slow');
+  });	
+</script>

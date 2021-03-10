@@ -1,0 +1,490 @@
+<div *ngIf="isLoad" class="loader-overlay">
+  <div class="loader1"></div>
+</div>
+  <div class="group-hd">
+    <ul class="top-bar order-md-1">
+      <li><a href="tel:1800818728" [ngClass]="{ 'disbleclass': ChatstartSubmitted}"><img src="/assets/images/phone-call.svg" alt="phone call"> 1800 818 728</a></li>
+      <li><a (click)="makebooking(0)"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> Make a
+          booking</a></li>
+      <li><a href="javascript:;" (click)="chatroomclick(1)" ><img src="/assets/images/chat.svg" alt="Chat Now">Chat Now</a></li>
+    </ul>
+    <h1>Quick Consultation</h1>
+  </div>
+  <div class="chat-main">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="chat-box">
+          <div class="online-user" *ngIf="ACEAppointmentId!=undefined">
+            <div class="user-frame">
+              <div class="user-img">
+                <span class="user-active">&nbsp;</span>
+                <figure> <img [src]="currentLiveChatAppts.CounsollerProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"  *ngIf="currentLiveChatAppts.CounsollerProfilePhoto!=null" style="min-height: 45px;object-fit:cover;">
+                </figure>
+              </div>
+              <div class="name-desig">
+                <h2>{{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}}</h2>
+                <h3>{{currentUser.RoleId==5?'EAP Client':'EAP Counsellor'}}</h3>
+              </div>
+              <div class="chat-dropdown">
+                <a *ngIf="messages.length!=0" href="#" data-toggle="dropdown">
+                  <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+                </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="javascript:;" (click)="EndChatSession(ACEAppointmentId)">End Chat Session</a>
+                  <!-- <a class="dropdown-item user-modal" href="javascript:;">See User Profile</a> -->
+                  <!-- <a href="#" class="btn blue-btn user-modal">See User Profile</a> -->
+                  <!-- <a class="dropdown-item" href="#">Session</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+    <!-- <div class="message-area" *ngIf="ACEAppointmentId==undefined"> -->
+      <!-- <div *ngIf="isListView"> -->
+        <div class="message-area"  *ngIf="ACEAppointmentId==undefined && isListView" style="padding: 0px 0px !important">
+          <div class="nano">
+               <div class="nano-content" style="right:0 !important">
+                 <div *ngIf="isListView">
+                  <div  class="office-hr">
+                  </div>
+
+                <div class="left-chat chat-info-msg">
+
+                      <div class="l-chat" style="padding-left: 20px;">
+                        <div class="l-msg" style="font-size: 15px;">Here you can use our AccessChat service to talk to a counsellor anytime between 8am and 8pm (AEST/AEDT). This is recommended for one-off sessions where you need help with a particular situation.</div>
+                      </div>
+                      <div class="l-img"></div>
+                  </div>
+                  <div class="left-chat chat-info-msg">
+
+                    <div class="l-chat" style="padding-left: 20px;">
+                      <div class="l-msg" style="font-size: 15px;">You will be connected with the next available counsellor, who will ask you about your situation and talk through potential solutions. Through this service, we cannot guarantee that your counsellor will be experienced in a particular area and you may not get the same counsellor as you have spoken with before. If you would like to talk to the same counsellor or a specialist counsellor, please use our Booking system or call us to arrange time with the counsellor of your choice.</div>
+                    </div>
+                    <div class="l-img"></div>
+                </div>
+                  <div class="left-chat chat-info-msg">
+
+                      <div class="l-chat" style="padding-left: 20px;">
+                        <div class="l-msg" style="font-size: 15px;">  As part of this service, the counsellor may need to collect personal information from you. This information is a necessary part of the treatment conducted by your counsellor. For information about confidentiality related to this service, please <a href="#" data-toggle="modal" data-target="#logout-Appointmentpopupinstant">click here . </a>If you have a question about this information or this service, please discuss it with the counsellor. You can also call us on <a href="tel:1800818728">1800 818 728</a> (8am to 6pm AEST/AEDT) or email us at <a href="mailto:info@accesseap.com.au">info@accesseap.com.au</a>. By continuing into the chat room, you agree that you have read and understood this information and agree to these conditions for the counselling service provided by AccessEAP.
+                          </div>
+                      </div>
+                      <div class="l-img"></div>
+                  </div>
+                  <div class="left-chat chat-info-msg">
+
+                    <div class="l-chat" style="padding-left: 20px;">
+                      <div class="l-msg" style="font-size: 15px;">
+                        If you are experiencing thoughts of harming yourself or someone else, please call Emergency Services (<a href="tel:000">000</a>) or the Mental Health Team at your local hospital. You can also contact Lifeline (<a href="tel:131114">13 11 14</a>) to speak with a counsellor 24/7.
+                        </div>
+                    </div>
+                    <div class="l-img"></div>
+                </div>
+
+                  <div class="left-chat chat-info-msg">
+                    <div class="ga-main" style="border: 0px; padding-bottom: 0px;">
+                      <h2>Are you having thoughts of suicide or self-harm?</h2>
+                      <div class="form-group">
+                          <label class="radio-btn">Yes
+                            <input type="radio" checked="checked" (change)="Nextclickcontinue()" name="radio" [value]="1" [(ngModel)]="Intchatradio">
+                            <span class="checkmark"></span>
+                          </label>
+                      </div>
+                      <div class="form-group">
+                          <label class="radio-btn">No
+                            <input type="radio" name="radio" (change)="Nextclickcontinue()" [value]="2"  [(ngModel)]="Intchatradio">
+                            <span class="checkmark"></span>
+                          </label>
+                      </div>
+                      <div>To proceed to AccessChat, please click “Next”.</div>
+                  </div>
+                  </div>
+                  <div   [ngClass]="{ 'disbleclass': !Nextbuttonshows}"  class="cnt-chat" style=" margin:1.4rem 0px 2rem 0px;text-align: right; padding-right: 30px;">
+                    <a  [ngClass]="{ 'btndisbled': !Nextbuttonshows}" class="btn appoint-btn" (click)="sendcontinue()">Next</a>
+                  </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-area"  *ngIf="ACEAppointmentId==undefined && !isListView" style="padding: 0px 0px !important">
+              <div class="nano">
+                   <div class="nano-content" style="right:0 !important">
+                   <div *ngIf="!isListView">
+
+                    <div class="office-hr m-0 text-center" style="padding-top:20%">
+                      <p *ngIf="buttontimestmsg && isInstantChatMessageshow==1 && !Nocounsoller && (Estimatedtime == null || Estimatedtime == 0)" style="padding-left: 10px;padding-right: 10px">One moment, we are connecting you to a counsellor.</p>
+                      <p *ngIf="buttontimestmsg && isInstantChatMessageshow==1 && !Nocounsoller && Estimatedtime != null && Estimatedtime != 0" style="padding-left: 10px;padding-right: 10px">One moment, we are connecting you to a counsellor. Your estimated time is {{Estimatedtime}} mins.</p>
+                     <p *ngIf="buttontimestmsg && isInstantChatMessageshow==1 && Nocounsoller" style="padding-left: 10px;padding-right: 10px">All of our counsellors are currently talking to other clients. To talk to a counsellor immediately, we recommend that you call us on <a href="tel:1800818728" >1800 818 728</a>. Alternatively you can make a booking for a chat session later through “Make a Booking”, or try us again later.</p>
+                     <p style="padding-left: 10px; padding-right: 10px;" *ngIf="instantchatyes && isInstantChatMessageshow==2">We are glad that you have reached out and contacted us. If you need immediate support, please dial <a href="tel:000">000</a>. Otherwise, our duty counsellor will be in touch soon to ensure that you are safe.</p>
+                     <p style="padding-left: 10px; padding-right: 10px;" *ngIf="!buttontimestmsg && isInstantChatMessageshow==3">Thank you for reaching out. This service is open from 8am - 6pm, Monday to Friday AEST/AEDT. If you would like to make a booking – either via Chat or another mode – please use the “Make a booking” link above or give us a call (24 hours). Same or next day appointments may be available. Alternatively, you can check back during our open hours.</p> 
+                     <!-- <p  style="text-align:left;padding-left: 3%" *ngIf="!buttontimestmsg && isInstantChatMessageshow==3">Coming soon.</p>
+                      <p  style="text-align:left;padding-left: 3% ;padding-right: 1%" *ngIf="!buttontimestmsg && isInstantChatMessageshow==3">
+                      Thank you for your interest in our instant chat messaging service. Instant chat is a way for you to access solution-focused counselling for a short-term issue, that's accessible from any internet-enabled device. </p>
+                      <p   style="text-align:left;padding-left: 3% ;padding-right: 1%" *ngIf="!buttontimestmsg && isInstantChatMessageshow==3">
+                      This service will be available from mid-2020. In the meantime, you can book a chat messaging appointment through the "Make a Booking" link at the top of this page. Alternatively, if you'd like to talk to someone now, please call us on <a href="tel:1800818728" >1800 818 728</a> to access a counsellor immediately via telephone.</p> -->
+                     <p *ngIf="Nocounllormsg && buttontimestmsg">We are sorry but no counseller is available to take chat at the moment. Please connect after some time.</p>
+                        <div  *ngIf="!instantchatyes && isInstantChatMessageshow!=2" class="chat-loader">
+                          <div class="dot-flashing"></div>
+                         </div>
+                    </div>
+                    <!-- <div *ngIf="Nocounllormsg" class="office-hr m-0 text-center" style="padding-top:20%">
+                      No counsellor
+                        <div class="chat-loader">
+                          <div class="dot-flashing"></div>
+                         </div>
+                    </div> -->
+
+                    <div class="chat-area" *ngIf="!instantchatyes"  [ngClass]="{ 'disbleclass': !buttontimestmsg}">
+                      <!-- <div class="emoji-section">
+
+                        <i class='attachment' (click)="toggled = !toggled" [(emojiPickerIf)]="toggled"
+                          [emojiPickerDirection]="'top'" (emojiPickerSelect)="handleSelection($event)"> <a
+                            href="javascript:;"><img src="/assets/images/emoji.png" alt="Emoji" /></a> </i>
+
+                      </div> -->
+                      <div class="form-group chat-field">
+                        <input type="text" [(ngModel)]="message.text" (keyup)="$event.keyCode == 13 && sendMessageinstant()"
+                          placeholder="Type a message" class="form-control" />
+                        <input (click)="sendMessageinstant()" type="button" value="submit" class="btn"/>
+                      </div>
+                    </div>
+                   </div>
+
+               </div>
+           </div>
+       </div>
+      <!-- </div> -->
+
+          <!-- <div class="message-area" > -->
+            <div class="message-area" *ngIf="ACEAppointmentId!=undefined">
+            <div class="nano">
+              <div class="nano-content">
+                <div [ngClass]="currentUser.UserId==msg.senderId?'right-chat':'left-chat chat-info-msg'"
+                 *ngFor="let msg of messages">
+
+                  <div  [ngClass]="currentUser.UserId==msg.senderId?'r-img':'l-img'">
+                    <figure>  <img  *ngIf="currentUser.UserId==msg.senderId" [src]="currentLiveChatAppts.ClientProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"  > </figure><figure><img  *ngIf="currentUser.UserId!=msg.senderId" [src]="currentLiveChatAppts.CounsollerProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';" ></figure></div>
+                  <div [ngClass]="currentUser.UserId==msg.senderId?'r-chat':'l-chat'">
+                    <div [ngClass]="currentUser.UserId==msg.senderId?'r-msg':'l-msg'">
+                      {{msg.text}}</div>
+                    <span>{{msg.date | date:'dd-MM-yyyy h:mm a'}}</span>
+                  </div>
+                </div>
+<!--
+                <div _ngcontent-c2="" class="messageChat"> Your Client, basky dusky has not joined yet.
+                  <div _ngcontent-c2="" class="white-dot black-dot">
+                    <span _ngcontent-c2="">&nbsp;</span>
+                    <span _ngcontent-c2="">&nbsp;</span>
+                    <span _ngcontent-c2="">&nbsp;</span>
+              </div></div> -->
+
+                <!--Connect with Mssg-->
+                <!-- <div *ngIf="messages.length==0" class="messageChat">
+                  You are now connected with
+                  {{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}}
+
+                  <div class="session-dropdown">
+                    <a href="#" data-toggle="dropdown" style="float: left;
+                    margin-left: 114px;">
+                      <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+                    </a>
+                  </div>
+                </div> -->
+                <!--If not Connect Mssg-->
+
+
+
+                <div *ngIf="messages.length==0" class="messageChat office-hr m-0 text-center">
+                   <div *ngIf="currentLiveChatAppts.EndDateDiffMins > 0 ">
+
+                    <div _ngcontent-c2="" class="messageChat" *ngIf="currentLiveChatAppts.StartDateDiffMins < 10  || currentLiveChatAppts.StartDateDiffMins==10">   {{StatingMsg}}
+                      <div _ngcontent-c2="" class="white-dot black-dot">
+                        <span _ngcontent-c2="">&nbsp;</span>
+                        <span _ngcontent-c2="">&nbsp;</span>
+                        <span _ngcontent-c2="">&nbsp;</span>
+                    </div></div>
+
+</div>
+<div _ngcontent-c2="" class="messageChat"  *ngIf="currentLiveChatAppts.StartDateDiffMins > 10">    Your appointment is scheduled for  {{currentLiveChatAppts.startDate}} {{currentLiveChatAppts.startTime}}
+  <div _ngcontent-c2="" class="white-dot black-dot">
+    <span _ngcontent-c2="">&nbsp;</span>
+    <span _ngcontent-c2="">&nbsp;</span>
+    <span _ngcontent-c2="">&nbsp;</span>
+</div></div>
+
+
+<div *ngIf="currentLiveChatAppts.StartDateDiffMins < 0 ">
+  <!-- <div *ngIf="currentLiveChatAppts.DurationMins < currentLiveChatAppts.StartDateDiffMinsposite">
+    You appointment time is completed
+  </div> -->
+  <div _ngcontent-c2="" class="messageChat"  *ngIf="currentLiveChatAppts.DurationMins < currentLiveChatAppts.StartDateDiffMinsposite">   Your appointment time is completed.
+    <div _ngcontent-c2="" class="white-dot black-dot">
+      <span _ngcontent-c2="">&nbsp;</span>
+      <span _ngcontent-c2="">&nbsp;</span>
+      <span _ngcontent-c2="">&nbsp;</span>
+  </div></div>
+
+</div>
+<!-- <div *ngIf="currentLiveChatAppts.IsCompleted==1">
+    You appointment time is completed
+</div> -->
+<!-- <div _ngcontent-c2="" class="messageChat" *ngIf="currentLiveChatAppts.IsCompleted==1">  You appointment time is completed.
+  <div _ngcontent-c2="" class="white-dot black-dot">
+    <span _ngcontent-c2="">&nbsp;</span>
+    <span _ngcontent-c2="">&nbsp;</span>
+    <span _ngcontent-c2="">&nbsp;</span>
+</div></div> -->
+<!-- <div *ngIf="currentLiveChatAppts.IsStarted==1 && currentLiveChatAppts.IsCompleted==0">
+  Your appointment is alreday started
+</div> -->
+<!-- <div _ngcontent-c2="" class="messageChat" *ngIf="currentLiveChatAppts.IsStarted==1 && currentLiveChatAppts.IsCompleted==0">  Your appointment is already started .
+  <div _ngcontent-c2="" class="white-dot black-dot">
+    <span _ngcontent-c2="">&nbsp;</span>
+    <span _ngcontent-c2="">&nbsp;</span>
+    <span _ngcontent-c2="">&nbsp;</span>
+</div></div> -->
+                  <!-- Your {{currentUser.RoleId==5?'Client':'Counsellor'}}, {{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}} has not joined yet. -->
+
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-area" *ngIf="ACEAppointmentId!=undefined">
+
+            <!-- <div class="emoji-section" [ngClass]="{ 'disbleclass': !Connectedcounsoller}">
+
+              <i class='attachment' (click)="toggled = !toggled" [(emojiPickerIf)]="toggled"
+                [emojiPickerDirection]="'top'" (emojiPickerSelect)="handleSelection($event)"> <a
+                  href="javascript:;"><img src="/assets/images/emoji.png" alt="Emoji" /></a> </i>
+
+            </div> -->
+            <div *ngIf="Appoitmenttimeovertime">Your Appointment Time is Over</div>
+            <div *ngIf="Chatendyourclient">Looks like your chat session has ended</div>
+            <div *ngIf="currentLiveChatAppts.EndDateDiffMins > 0 ">
+              <div *ngIf="currentLiveChatAppts.StartDateDiffMins < 10 || currentLiveChatAppts.StartDateDiffMins==10">
+                <div *ngIf="!Appoitmenttimeovertime">
+                <div class="form-group chat-field" [ngClass]="{ 'disbleclass': !Connectedcounsoller}">
+                  <input type="text" [ngClass]="{ 'disbleclass': !Connectedcounsoller}" id="textvalfornow" [(ngModel)]="message.text"  (keydown)="Typingshowfunction()"  (keyup)="$event.keyCode == 13 && sendMessage()"
+                    placeholder="Type a message" class="form-control" />
+                  <input  (click)="sendMessage()" type="button" value="submit" class="btn" />
+                </div>
+              </div>
+              <div *ngIf="Appoitmenttimeovertime">
+                <div class="form-group chat-field" [ngClass]="{ 'disbleclass': !Connectedcounsoller}">
+                  <input type="text" [ngClass]="{ 'disbleclass': !Connectedcounsoller}" id="textvalfornow" [(ngModel)]="message.text"  (keydown)="Typingshowfunction()"  (keyup)="$event.keyCode == 13 && sendMessage()"
+                    placeholder="Type a message" class="form-control" />
+                  <input  (click)="sendMessage()" type="button" value="submit" class="btn" />
+                </div>
+              </div>
+              </div>
+            </div>
+            <div *ngIf="Chatstarttyping">{{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}} Typing</div>
+
+
+            <div *ngIf="currentLiveChatAppts.StartDateDiffMins > 10" >
+            <div class="form-group chat-field">
+              <input type="text"  disabled [(ngModel)]="message.text"  (keyup)="$event.keyCode == 13 && sendMessage()"
+                placeholder="Type a message" class="form-control" />
+              <input disabled (click)="sendMessage()" type="button" value="submit" class="btn" />
+            </div>
+        </div>
+        <div *ngIf="currentLiveChatAppts.StartDateDiffMins < 0 ">
+          <div *ngIf="currentLiveChatAppts.DurationMins < currentLiveChatAppts.StartDateDiffMinsposite">
+            <div class="form-group chat-field">
+              <input type="text"  disabled [(ngModel)]="message.text" (keyup)="$event.keyCode == 13 && sendMessage()"
+                placeholder="Type a message" class="form-control" />
+              <input disabled (click)="sendMessage()" type="button" value="submit" class="btn" />
+            </div>
+          </div>
+        </div>
+
+          <!-- <div *ngIf="currentLiveChatAppts.IsCompleted==1">
+            <div class="form-group chat-field">
+              <input type="text"  disabled [(ngModel)]="message.text" (keyup)="$event.keyCode == 13 && sendMessage()"
+                placeholder="Type a message" class="form-control" />
+              <input disabled (click)="sendMessage()" type="button" value="submit" class="btn" />
+            </div>
+        </div> -->
+        <!-- <div *ngIf="currentLiveChatAppts.IsStarted==1 && currentLiveChatAppts.IsCompleted==0">
+            <div class="form-group chat-field">
+              <input type="text"  [(ngModel)]="message.text" (keyup)="$event.keyCode == 13 && sendMessage()"
+                placeholder="Type a message" class="form-control" />
+              <input  (click)="sendMessage()" type="button" value="submit" class="btn" />
+          </div>
+        </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 position-relative">
+        <!-- <div>
+                    <a href="#" class="btn blue-btn">End Chat Session</a>
+                </div>
+                <div>
+                    <a href="#" class="btn blue-btn user-modal">See User Profile</a>
+                </div>  -->
+
+        <div id="profile-modal" class="profile-modal" style="display:none;">
+          <a class="close-modal"><img src="/assets/images/close-circle.svg" alt="close"></a>
+          <div class="pm-user-avtar">
+            <span class="user-active">&nbsp;</span>
+            <figure><img src="/assets/images/avtar-rectangle.png" alt=""></figure>
+          </div>
+          <ul>
+            <li><span>{{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}}</span></li>
+            <li>Employer: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientOrganisationName:currentLiveChatAppts.CounsellerOrganisationName}}</span></li>
+            <li>Group: <span>APAC</span></li>
+            <li>Division: <span>Client Acquisition</span></li>
+            <li>Department: <span>Sales</span></li>
+            <li>Email: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientEmail:currentLiveChatAppts.CounsellerEmail}}</span></li>
+            <li>Phone: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientMobileNo:currentLiveChatAppts.CounsellerMobileNo}}</span></li>
+            <li>Post Code: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientPostcode:currentLiveChatAppts.CounsellerPostcode}}</span></li>
+            <li>DOB: <span>26 October 1986</span></li>
+          </ul>
+        </div>
+        <div class="modal fade" id="logout-Appointmentpopupinstant">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="btn-grp text-right">
+                  <a href="#" data-dismiss="modal"><img src="../../assets/images/close-modal.svg" /></a>
+              </div>
+                  <div class="cancel-apntmnt">
+                      <p style="text-align: left"> Your instant chat is confidential – meaning the counsellor will not share this information with anyone. There are some exceptions. We may share information with others if:
+                        We believe you may harm yourself or someone else
+                        We-re subpoenaed by a court of law
+                        You give us permission to share this information
+                        The instant chat Counsellor will have access to your case notes if you’ve done AccessEAP counselling before. Also, any other AccessEAP counsellors you see in the future will have access to your Instant Chat case notes.
+                        By continuing with this service, you consent to these conditions.</p>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div  *ngIf="chatisstatrd" >
+        <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+             <div class="modal-body">
+                 <div class="cancel-apntmnt">
+                     <p> Are you sure to end the chat and leave this chat session?</p>
+                     <div class="btn-grp" style="width: 100% !important; text-align: center;">
+                         <a href="javascript:;" (click)="Yesmodelchatend()" class="btn appoint-btn" data-dismiss="modal">Yes</a>
+
+                         <a href="javascript:;" (click)="Cancelmodelchatend()" class="btn appoint-btn" data-dismiss="modal" >No</a>
+                     </div>
+                 </div>
+             </div>
+           </div>
+         </div>
+     </div>
+
+     </div>
+     <div  *ngIf="showquataEmptymsg" >
+      <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+           <div class="modal-body">
+               <div class="cancel-apntmnt" style='text-align: center;
+               padding-top: 37px;'>
+                  <img _ngcontent-c10=""  src="/assets/images/cross_icon.svg" class="edit-btn1" (click)="closeModel()">
+                   <p>Your booking quota is finished</p>
+                   <!-- <div class="btn-grp">
+                       <a href="javascript:;" (click)="Yesmodelchatend()" class="btn appoint-btn" data-dismiss="modal">Yes</a>
+                   </div> -->
+                   <!-- <div class="btn-grp">
+                      <a href="javascript:;" class="cancel-text-link" (click)="closeModel()">Cancel</a>
+                  </div> -->
+               </div>
+           </div>
+         </div>
+       </div>
+   </div>
+
+   </div>
+   <div  *ngIf="Chatisstatrdendedstop" >
+    <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-body">
+             <div class="cancel-apntmnt">
+                 <p>The person you are speaking to has left the chat room. You may now close this window. If you were not expecting your session to end, please return to the Home screen and re-join.</p>
+                 <div class="btn-grp" style="width: 50% !important;padding-left: 28% !important;">
+                     <a href="javascript:;" (click)="YesmodelchatendOk()" class="btn appoint-btn" data-dismiss="modal">OK</a>
+                 </div>
+                 <!-- <div class="btn-grp" style="width: 48% !important;">
+                     <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+                 </div> -->
+             </div>
+         </div>
+       </div>
+     </div>
+ </div>
+ </div>
+ <div  *ngIf="Chatisdisconectnternet" >
+  <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+           <div class="cancel-apntmnt">
+               <p>The person you are speaking to has left the chat room. You may now close this window. If you were not expecting your session to end, please return to the Home screen and re-join.</p>
+               <div class="btn-grp" style="width: 50% !important;padding-left: 28% !important;">
+                   <a href="javascript:;" (click)="YesmodelchatendOkInternet()" class="btn appoint-btn" data-dismiss="modal">OK</a>
+               </div>
+               <!-- <div class="btn-grp" style="width: 48% !important;">
+                   <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+               </div> -->
+           </div>
+       </div>
+     </div>
+   </div>
+</div>
+</div>
+ <div  *ngIf="Chatappoitmettimeisover" >
+  <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+           <div class="cancel-apntmnt">
+               <p style="text-align: center !important">Your appointment time is over. So chat is ended</p>
+               <div class="btn-grp" style="width: 50% !important;padding-left: 28% !important;">
+                   <a href="javascript:;" (click)="YesmodelchatendOk()" class="btn appoint-btn" data-dismiss="modal">OK</a>
+               </div>
+               <!-- <div class="btn-grp" style="width: 48% !important;">
+                   <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+               </div> -->
+           </div>
+       </div>
+     </div>
+   </div>
+</div>
+
+</div>
+<div  *ngIf="Instantchatsearchcounsoller" >
+  <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+           <div class="cancel-apntmnt">
+               <p>It looks like all our counsellors are unavailable at the moment. Would you like to stay and continue waiting until a counsellor is available? Alternatively, you can leave and try again later.</p>
+
+               <div class="btn-grp" style="width: 100% !important; text-align: center;">
+                <a href="javascript:;" (click)="YesInstantcchatendSearch()" class="btn appoint-btn" data-dismiss="modal">Stay</a>
+
+                <a href="javascript:;" (click)="NoInstantcchatend()" class="btn appoint-btn" data-dismiss="modal" >Leave</a>
+               </div>
+           </div>
+       </div>
+     </div>
+   </div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+
+

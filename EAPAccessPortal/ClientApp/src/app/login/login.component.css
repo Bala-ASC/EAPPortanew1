@@ -1,0 +1,4 @@
+.is-invalid{
+    border: 0.5px solid red!important;
+    /* border-bottom-style:0.5px solid red!important; */
+} 

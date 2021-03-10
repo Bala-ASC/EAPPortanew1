@@ -1,0 +1,265 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/custom.css">
+<div  *ngIf=isLoad class="loader-overlay">
+    <div class="loader1"></div>
+</div> 
+
+<div  class="white-bg">
+<div class="lr-header">
+    <div class="container-fluid">
+        <figure class="lr-logo"><a routerLink=""><img style="max-width:150px;" src="/assets/images/logo.svg" alt="AccessEAP People in focus Counselling & Chat Portal"
+                    title="AccessEAP People in focus Counselling & Chat Portal"></a>
+                    <figcaption style="color:#153472">Online Wellbeing</figcaption></figure>
+    </div>
+</div>
+
+<div class="left-image">
+    <img src="/assets/images/login-register/left-image.png" class="d-none d-lg-block" alt="img">
+    <img src="/assets/images/login-register/wap-image.jpg" class="d-block d-lg-none" alt="img">
+</div>
+<!--1-->
+<div *ngIf="show1" id="signup1" class="lr-middle">
+    <div class="container">
+        <div class="lr-form-main">
+            <form [formGroup]="employerGroup" (ngSubmit)="onNext(2)">
+            <div class="reg-info">
+                <div></div>
+                <h2>Please provide some information to complete registration</h2>
+            </div>
+
+            <div class="form-box">
+                <div class="row">
+                 
+                    <div class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/phone.svg" alt="building"></span>
+                            </div>
+                        
+                            <input type="text"  class="form-control" placeholder="Mobile No"  pattern="\d+" maxlength="10"
+                            minlength="10" (keypress)="matcher($event)"
+                                    formControlName="MobileNo" [ngClass]="{ 'is-invalid': employerSubmitted && fe.MobileNo.errors }" id="MobileNo"/>
+                            <div *ngIf="employerSubmitted && fe.MobileNo.errors" class="invalid-feedback">  Phone No must be a number and 10 digits.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/location.svg"
+                                        alt="building"></span>
+                            </div>
+                         
+                            <input type="text" pattern="\d+" class="form-control" placeholder="Postcode" maxlength="4" (keypress)="matcher($event)"
+                            formControlName="Postcode" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Postcode.errors }" id="Postcode" />
+                    <div *ngIf="employerSubmitted && fe.Postcode.errors" class="invalid-feedback"> Post Code must be a number and maximum 4 digit.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/person.svg" alt="building"></span>
+                            </div>
+                            <select (change)="onchangeGender($event)"  class="custom-select form-control" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Gender.errors }" formControlName="Gender">
+                                <option value="">Please Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Non-Binary">Non-Binary</option>
+                                <option value="Other/Prefer not to say">Other/Prefer not to say</option>
+                            </select>
+
+                            <!-- <div *ngIf="employerSubmitted && fe.Gender.errors" class="invalid-feedback">
+                                    <div *ngIf="fe.Gender.errors.required">Gender is required</div>
+                                </div> -->
+                                
+                                <div *ngIf="employerSubmitted && fe.Gender.errors?.required" class="invalid-feedback" >
+                                    <sup>*</sup>Gender is required
+                                  </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/calender.svg"
+                                        alt="building"></span>
+                            </div>
+                            <!-- <input type="date" [(ngModel)]="signupUser.DateOfBirth" class="form-control"
+                                    data-provide="datepicker" placeholder="Date of birth">  -->
+                            <!-- <input type="text" class="form-control" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" #dp="bsDatepicker"
+                                [(ngModel)]="signupUser.DateOfBirth" 
+                                bsDatepicker [(bsValue)]="bsValue" placeholder="Date Of Birth"> -->
+
+                               
+                            <!-- <input class="form-control" [(ngModel)]="signupUser.DateOfBirth" id="date-input" type="date" name="date-input" placeholder="date"> -->
+                            <input type="text" class="form-control" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false,adaptivePosition: true}" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" placeholder="Date Of Birth"
+                                    placeholder="Date of birth" [maxDate]="maxDate"  formControlName="DateOfBirth" [ngClass]="{ 'is-invalid': employerSubmitted && fe.DateOfBirth.errors }" id="Dob"/>
+                            <!-- <div *ngIf="submitted1 && f.DateOfBirth.errors" class="invalid-feedback"> </div> -->
+                            <div *ngIf="employerSubmitted && fe.DateOfBirth.errors" class="invalid-feedback">
+                                <div *ngIf="fe.DateOfBirth.errors.required">Date of birth is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group confirm-txt">
+                        By registering you confirm that you accept the <a href="https://www.accesseap.com.au/services/faq">FAQs</a> and <a href="https://www.accesseap.com.au/resources/privacy-policy">Privacy
+                            Policy</a>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <!-- <a routerLink="/portal/signupA" class="btn appoint-btn">Next</a> -->
+                        <!-- <a (click)="onNext(2)" class="appoint-btn">Next</a> -->
+                        <input type="submit" value={{txtbxvalue}}  class="btn appoint-btn">
+                        <!-- <button class="btn appoint-btn" value="Next">Next</button> -->
+                    </div>
+                </div>
+            </div>
+             </form> 
+        </div>
+    </div>
+</div>
+<!--2-->
+<div *ngIf="show2" id="signup2" class="lr-middle" style="position: absolute;top: 13%;">
+    <div class="container">
+        <div class="lr-form-main">
+            <form [formGroup]="candidateGroup" (ngSubmit)="onNext(3)">
+            <div class="reg-info">
+                <h2>Thanks. We were able to verify your account. To get you started, we need a few details.</h2>
+            </div>
+
+            <div class="form-box">
+                <div class="row">
+                    <div *ngIf=txtgrpbox class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/building.svg"
+                                        alt="building"></span>
+                            </div>
+                            <!-- <input type="text" class="form-control" placeholder="Group"> -->
+                            <select class="form-control"  (change)="onGroupChange()" placeholder="Group"
+                            formControlName="Groupselect" [ngClass]="{ 'is-invalid': candidateSubmitted && fc.Groupselect.errors }">
+                                <option disabled value="">Please select Group</option>
+                                <option *ngFor="let group of groups" value="{{group.GroupId}}">
+                                    {{group.GroupName}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted2 && f.Groupselect.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Groupselect.errors.required">Group is required</div>
+                                </div>
+                            <p class="info-txt">The group within your company you work in</p>
+                        </div>
+                    </div>
+                    <div *ngIf=txtdivbox class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/group.svg" alt="building"></span>
+                            </div>
+                            <!-- <input type="text" class="form-control" placeholder="Division"> -->
+                            <select class="form-control" id="Divisionselect" placeholder="Division" (change)="onDivisionChange()"
+                            formControlName="Divisionselect" [ngClass]="{ 'is-invalid': candidateSubmitted && fc.Divisionselect.errors }">
+                                <option selected disabled value="">Please select Division</option>
+                                <option *ngFor="let division of divisions" value="{{division.DivisionId}}">
+                                    {{division.DivisionName}}
+                                </option>
+                            </select>
+                            <!-- <div *ngIf="submitted2 && f.Divisionselect.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Divisionselect.errors.required">Division is required</div>
+                                </div> -->
+                            <p class="info-txt">The division within your company you work in</p>
+                        </div>
+                    </div>
+                    <div *ngIf=txtdeptbox class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/two-people.svg"
+                                        alt="building"></span>
+                            </div>
+                            <!-- <input type="text" class="form-control" placeholder="Department"> -->
+                            <select class="form-control" id="Departmentselect" name="Departmentselect" placeholder="Departments"
+                            formControlName="Departmentselect" [ngClass]="{ 'is-invalid': candidateSubmitted && fc.Departmentselect.errors }">
+                                <option selected disabled value="">Please select Department</option>
+                                <option *ngFor="let department of departments" value="{{department.DepartmentId}}">
+                                    {{department.DepartmentName}}
+                                </option>
+                            </select>
+                            <!-- <div *ngIf="submitted2 && f.Departmentselect.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Departmentselect.errors.required">Department is required</div>
+                                </div> -->
+                            <p class="info-txt">The department within your company you work in</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group confirm-txt">
+                        By registering you confirm that you accept the <a href="https://www.accesseap.com.au/services/faq">FAQs</a> and <a href="https://www.accesseap.com.au/resources/privacy-policy">Privacy
+                            Policy</a>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <!-- <a routerLink="/portal/signupB" class="btn appoint-btn">Register</a> -->
+                        <!-- <a (click)="onNext(3)" class="appoint-btn">Register</a> -->
+                        <input type="submit" value="Register" class="btn appoint-btn" >
+                        <!-- <button (click)="onNext(3)" class="btn appoint-btn" value="Register">Register</button> -->
+                    </div>
+                </div>
+            </div>
+             </form> 
+        </div>
+    </div>
+</div>
+<!--3-->
+<div *ngIf="show3" id="signup1" class="lr-middle">
+    <div class="container">
+        <div class="lr-form-main">
+            <div class="reg-info">
+
+                <h2 class="mb-3"><i class="fa fa-check" aria-hidden="true"></i> &nbsp; A Verification link has been
+                    sent to your email account</h2>
+                <h4>Please check on the link that has just sent to your email account to verify your email
+                    and continue the registration process.
+                </h4>
+            </div>
+
+            <!-- <div class="form-box">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/unlock.svg" alt="unlock"></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="/assets/images/login-register/unlock.svg" alt="unlock"></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Re-enter your password">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input routerLink="/portal/dashboard" type="submit" value="Confirm" class="btn appoint-btn">
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="lr-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 order-md-2 lr-social">
+                <a href="#" target="_blank"><img src="/assets/images/linkedin.svg" alt="AccessEAP"></a>
+                <a href="#" target="_blank"><img src="/assets/images/twitter.svg" alt="AccessEAP"></a>
+            </div>
+            <div class="col-md-4 order-md-1 pc-links">
+                <a href="https://www.accesseap.com.au/resources/privacy-policy">Privacy Policy</a>
+                <a href="https://www.accesseap.com.au/contact-us">Contact us</a>
+            </div>
+            <div class="col-md-5 order-md-0 lr-copy">
+                <p>Copyright © AccessEAP. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<toaster-container [toasterconfig]="config">
+</toaster-container>

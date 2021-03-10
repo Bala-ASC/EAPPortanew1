@@ -1,0 +1,153 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/custom.css">
+<div  *ngIf="isLoad" class="loader-overlay">
+        <div class="loader1"></div>
+</div> 
+<div  *ngIf="ismsgsss" >
+   <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">        
+        <div class="modal-body">
+            <div class="cancel-apntmnt">
+                <p>Client Requesting Chat</p>
+                <p>A client is requesting to have an immediate text chat with one of our counsellors. You will now be connected to the client, {{clientnameshowpopup}} </p>
+                <div class="btn-grp">
+                    <a href="javascript:;" (click)="Yesmodel()" class="btn appoint-btn" data-dismiss="modal">Connect Me Now</a>
+                </div>
+                <div class="btn-grp">
+                    <a href="javascript:;" (click)="Cancelmodel()" class="cancel-text-link" data-dismiss="modal" >I can't take this right now!</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+</div>
+<div  *ngIf="chatisstatrd" >
+    <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">        
+         <div class="modal-body">
+             <div class="cancel-apntmnt">
+                 <p> Are you sure to end the chat and leave this chat session?</p>
+                 <div class="btn-grp" style="width: 100% !important; text-align: center;">
+                    <a href="javascript:;" (click)="Yesmodelchatend()" class="btn appoint-btn" data-dismiss="modal">Yes</a>
+                
+                    <a href="javascript:;" (click)="Cancelmodelchatend()" class="btn appoint-btn" data-dismiss="modal" >No</a>
+                </div>
+             </div>
+         </div>
+       </div>
+     </div>
+ </div>
+ 
+ </div>
+<div class="inner-main">
+    <div class="sub-header d-block d-lg-none">
+        <figure class="brand-logo"><a href="index.html" ><img style="max-width:150px;" src="/assets/images/logo.svg" alt="AccessEAP People in focus"
+                    title="AccessEAP People in focus">
+              
+
+                </a>
+                <figcaption style="color:#153472">Online Wellbeing</figcaption>
+                </figure>
+                <!-- <input id="file-input_Thumbnail" type="file" name="IconImage"
+                [(ngModel)]="contentTopic.IconImage" (change)="selectPhoto($event.target.files)"
+      #IconImage="ngModel">  -->
+     
+        <a class="expand-nav humberg-nav ">
+            <!---->
+            <svg class="ham ham2" viewBox="0 0 100 100" width="50" onclick="this.classList.toggle('active')">
+                <path class="line top" d="m 70,33 h -40 c -6.5909,0 -7.763966,-4.501509 -7.763966,-7.511428 0,-4.721448 3.376452,-9.583771 13.876919,-9.583771 14.786182,0 11.409257,14.896182 9.596449,21.970818 -1.812808,7.074636 -15.709402,12.124381 -15.709402,12.124381" />
+                <path class="line middle" d="m 30,50 h 40" />
+                <path class="line bottom" d="m 70,67 h -40 c -6.5909,0 -7.763966,4.501509 -7.763966,7.511428 0,4.721448 3.376452,9.583771 13.876919,9.583771 14.786182,0 11.409257,-14.896182 9.596449,-21.970818 -1.812808,-7.074636 -15.709402,-12.124381 -15.709402,-12.124381" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="left-side">
+        <figure class="profile-pic">
+            <!-- <span class="user-active">&nbsp;</span> -->
+            <a  (click)="onMenuClick(0)" [ngClass]="{'active': currentMenuIndex == 0}">
+                <img [src]="user.ProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_s.jpg';"  *ngIf="user.ProfilePhoto!=null" style="min-height: 45px;object-fit:cover;">
+                <img src="/assets/images/defaultprofile_s.jpg" alt="User image" *ngIf="user.ProfilePhoto==null" style="min-height: 45px;object-fit:cover;"></a>
+        </figure>
+        <div class="main-navigation">
+            <ul>
+                <li><a  (click)="onMenuClick(1)" [ngClass]="{'active': currentMenuIndex == 1}"><object type="image/svg+xml" data="/assets/images/home-nav.svg"></object>
+                        <span>Home</span></a></li>
+                <!-- <li><a routerLink="/dashboard-counsellor/counsellor-booking" (click)="onMenuClick(2)" [ngClass]="{'active': currentMenuIndex == 2}"><object type="image/svg+xml" data="/assets/images/calendar-alt.svg"></object> <span>Make
+                            a booking</span></a></li> -->
+                <li><a  (click)="onMenuClick(3)" [ngClass]="{'active': currentMenuIndex == 3}"><object type="image/svg+xml" data="/assets/images/calendar-check-nav.svg"></object> <span>Booking
+                            History</span></a></li>
+                <!-- <li><a routerLink="/dashboard-counsellor/counsellor-room" (click)="onMenuClick(4)" [ngClass]="{'active': currentMenuIndex == 4}"><object type="image/svg+xml" data="/assets/images/chat.svg"></object> <span>Chat Room</span></a></li> -->
+                <li><a  (click)="onMenuClick(5)" [ngClass]="{'active': currentMenuIndex == 5}"><object type="image/svg+xml" data="/assets/images/user-edit-nav.svg"></object>
+                        <span>Upcoming Appointments</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="right-side">
+            <router-outlet></router-outlet>
+        <!-- <div class="group-hd">
+            <ul class="top-bar order-md-1">
+                <li><a href="#"><img src="/assets/images/phone-call.svg" alt="phone call"> <span>1800 818 728</span></a></li>
+                <li><a href="#"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> <span>Make a booking</span></a></li>
+                <li><a href="#"><img src="/assets/images/chat.svg" alt="Instant Chat"> <span>Instant Chat</span></a></li>
+            </ul>
+            <h1>Home</h1>
+        </div>
+
+        <div class="white-board">
+            <div class="month-heading"><img src="/assets/images/calendar-alt.svg" alt="calendar" /> This Month</div>
+            <div class="clear-div">
+                <div class="row">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="session-box">
+                                    <div class="session-dropdown"></div>
+                                    <div class="session-left">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                    <div class="session-right">
+                                        <h3>Session Allowance : 6</h3>
+                                        <h3 class="red-clr">Sessions Used: 4</h3>
+                                        <h3 class="blue-clr">Sessions Remaining: 2</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="session-box">
+                                    <div class="session-dropdown">
+                                        <a href="#" data-toggle="dropdown">
+                                            <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Session Allowance</a>
+                                            <a class="dropdown-item" href="#">Session Allowance</a>
+                                            <a class="dropdown-item" href="#">Session Allowance</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="session-left">
+                                        &nbsp;
+                                    </div>
+                                    <div class="session-right">
+                                        <h3>F2F Chat Appointment</h3>
+                                        <p>March 20th, 2019. 4:00pm</p>
+                                        <p>Counsellor: <strong>Samantha Hays</strong></p>
+                                        <p>Meeting with: You</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

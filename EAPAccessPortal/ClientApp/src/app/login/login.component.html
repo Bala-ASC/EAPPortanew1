@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/assets/css/custom.css">
+<div  *ngIf="isLoad" class="loader-overlay">
+  <div class="loader1"></div>
+</div> 
+<div  class="white-bg">
+<div class="lr-header">
+  <div class="container-fluid">
+    <figure class="lr-logo l-logo"><a routerLink=""><img style="max-width:150px;" src="/assets/images/logo.svg" alt="AccessEAP People in focus Counselling & Chat Portal"
+          title="AccessEAP People in focus Counselling & Chat Portal"></a>
+          <figcaption style="color:#153472">Online Wellbeing</figcaption></figure>
+  </div>
+</div>
+
+<div class="right-image">
+  <img src="/assets/images/login-register/right-image.png" class="d-none d-lg-block" alt="img">
+  <img src="/assets/images/login-register/wap-image.jpg" class="d-block d-lg-none" alt="img">
+</div>
+
+<div class="lr-middle">
+  <div class="container">
+    <div class="lr-form-main login-form">
+      <div class="reg-info">
+        <h2>Welcome back.</h2>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login($event)">
+        <div class="form-box">
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><img src="/assets/images/login-register/email.svg" alt="email"></span>
+                </div>                
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                  placeholder="Enter your email address" id="email" autocomplete="on"/>
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors?.pattern">Email must be a valid email address</div>
+                </div>
+              </div> 
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><img src="/assets/images/login-register/unlock.svg" alt="unlock"></span>
+                </div>
+                <!-- <input type="text" class="form-control" placeholder="Enter your password"> -->
+                <input type="password" formControlName="passWord" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passWord.errors }"
+                  placeholder="Enter your password" />
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <!-- <input type="submit" value="Login" class="btn appoint-btn"> -->
+              <!-- <a routerLink="/dashboard" class="btn appoint-btn">Login</a> -->
+              <button class="btn appoint-btn">Login</button>
+            </div>
+            <div class="col-md-12 form-group forgot-link">
+              <a routerLink="/forgot">Forgot your password?</a>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="lr-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 order-md-2 lr-social">
+        <a href="#" target="_blank"><img src="/assets/images/linkedin.svg" alt="AccessEAP"></a>
+        <a href="#" target="_blank"><img src="/assets/images/twitter.svg" alt="AccessEAP"></a>
+      </div>
+      <div class="col-md-4 order-md-1 pc-links">
+        <a href="https://www.accesseap.com.au/resources/privacy-policy">Privacy Policy</a>
+        <a href="https://www.accesseap.com.au/contact-us">Contact us</a>
+      </div>
+      <div class="col-md-5 order-md-0 lr-copy">
+        <p>Copyright © AccessEAP. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<toaster-container [toasterconfig]="config">
+</toaster-container>

@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/custom.css">
+<div  class="white-bg">
+<div class="lr-header">
+    <div class="container-fluid">
+        <figure class="lr-logo l-logo"><a routerLink=""><img style="max-width:150px;" src="/assets/images/logo.svg" alt="AccessEAP People in focus Counselling & Chat Portal"
+                    title="AccessEAP People in focus Counselling & Chat Portal"></a>
+                    <figcaption style="color:#153472">Online Wellbeing</figcaption></figure>
+    </div>
+</div>
+
+<div class="right-image">
+    <img src="/assets/images/login-register/right-image.png" class="d-none d-lg-block" alt="img">
+    <img src="/assets/images/login-register/wap-image.jpg" class="d-block d-lg-none" alt="img">
+</div>
+<div *ngIf="isLoad" class="loader-overlay">
+    <div class="loader1"></div>
+  </div>
+
+<div class="lr-middle">
+    <div class="container">
+        <div class="lr-form-main login-form">
+            <div class="reg-info">
+                <!-- <h2>We'll send you an email<br>with password reset instructions.</h2> -->
+                <h2>Please enter your organisation’s website or domain name</h2>
+            </div>
+            <form [formGroup]="loginForm"(ngSubmit)="onSubmit()">
+                <div class="form-box">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="/assets/images/login-register/unlock.svg"
+                                            alt="email"></span>
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="Enter your Domain Name"> -->
+                                <input type="text" formControlName="DomainName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.DomainName.errors }"
+                                placeholder="Website or Domain Name" id="DomainName"/>
+              
+                            </div>
+
+                        </div>
+                    </div>
+           
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <!-- <a routerLink="/reset" class="btn appoint-btn">Reset</a> -->
+                            <button class="btn appoint-btn">Next</button>
+                        </div>
+                        <!-- <div class="col-md-12 form-group forgot-link">
+                            <a routerLink="/login" class="mr-3">Login</a><a routerLink="/">Create Account</a>
+                        </div> -->
+                    </div>
+                </div>
+            </form> 
+        </div>
+    </div>
+  </div>
+    <div class="lr-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 order-md-2 lr-social">
+                    <a href="#" target="_blank"><img src="/assets/images/linkedin.svg" alt="AccessEAP"></a>
+                    <a href="#" target="_blank"><img src="/assets/images/twitter.svg" alt="AccessEAP"></a>
+                </div>
+                <div class="col-md-4 order-md-1 pc-links">
+                    <a href="https://www.accesseap.com.au/resources/privacy-policy">Privacy Policy</a>
+                    <a href="https://www.accesseap.com.au/contact-us">Contact us</a>
+                </div>
+                <div class="col-md-5 order-md-0 lr-copy">
+                    <p>Copyright © AccessEAP. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  *ngIf="showmsg" >
+        <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">        
+             <div class="modal-body">
+                 <div class="cancel-apntmnt" style='text-align: center;
+                 padding-top: 10px;'>
+                    <span [innerHTML]="this.message"></span>
+                     <div class="btn-grp">
+                        <a (click)="closeModel()" class="btn appoint-btn">Ok</a>
+                    </div>
+                 </div>
+             </div>
+           </div>
+         </div>
+     </div>
+     
+     </div>
+</div>
+<toaster-container [toasterconfig]="config">
+</toaster-container>

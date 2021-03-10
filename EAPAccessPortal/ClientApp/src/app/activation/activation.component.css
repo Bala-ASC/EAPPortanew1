@@ -1,0 +1,30 @@
+.cls-login{
+    background: #dcddde !important;
+    border-color: #dcddde !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    display: flex;
+    min-height: 100vh;
+}
+.cls-login-logo{height: 70px;
+    width: 24%;
+    margin-top: -111px;
+    margin-left: 435px;
+}
+.is-invalid{
+    border-bottom: 0.5px solid red!important;
+    /* border-bottom-style:0.5px solid red!important; */
+} 
+h1{
+    font-size: 24px !important;
+}
+.btn-link:hover{
+    color:#bdd63b;
+
+}
+.btn-link{
+    color: #bdd63b;
+}
+.fa {
+    color: #fff;
+}

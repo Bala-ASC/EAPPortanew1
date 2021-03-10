@@ -1,0 +1,117 @@
+.app-field {
+    display: table;
+    width: 100%;
+    box-shadow: 0px 1px 4px #E5E9F2;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px 10px 8px 25px;
+  }
+
+    .app-field label {
+      display: table-cell;
+      font-size: 16px;
+      color: #A7A9AC;
+      font-weight: normal;
+      font-family: 'HelveticaNeueLTStd-Roman';
+      margin: 7px 0px 0px 0px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      width: 1px;
+      position: relative;
+      right: 10px;
+    }
+
+    .app-field .form-control {
+      display: table-cell;
+      padding: 0px;
+      border: 0px;
+      color: #153472;
+      font-size: 16px;
+      background: transparent;
+    }
+
+      .app-field .form-control::-webkit-input-placeholder {
+        color: #153472
+      }
+
+      .app-field .form-control:-ms-input-placeholder {
+        color: #153472
+      }
+
+      .app-field .form-control::placeholder {
+        color: #153472
+      }
+
+      .radio-btn {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    font-size: 18px;
+    color: #4D4D4F;
+    padding-left: 40px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 0px;
+      }
+      .top-right {
+        position: absolute;
+        top: 0px;
+        right: 16px;
+      }
+      .arrowmark {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+      /* .app-field {
+        padding: 6px 10px 3px 15px;
+        margin-bottom: 10px;
+      }
+    
+        .app-field label {
+          right: 5px;
+        }
+    
+        .app-field label, .app-field .form-control {
+          font-size: 14px;
+        } */
+
+     
+      /* .top-right[_ngcontent-c12]{
+        top:4x !important;
+      } */
+      .img-thumnail{
+        width: 150px;
+        height: 119px;
+        box-shadow: 0px 1px 4px #E5E9F2;
+        border-radius: 10px;
+        object-fit: cover;
+
+      }
+      .edit-btn{
+        left: 135px;
+        top: 5px;
+        position: absolute;
+        width:25px;
+        height: 25px;
+      }
+      .is-invalid{
+        /* border: 0.5px solid red!important; */
+        border-bottom:0.5px solid red!important;
+    } 
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.edit-btn1{
+  left: 470px;
+  top: 5px;
+  position: absolute;
+  width:25px;
+  height: 25px;
+}

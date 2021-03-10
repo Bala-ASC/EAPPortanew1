@@ -1,0 +1,4 @@
+.disbleclass{
+    cursor: not-allowed;
+    pointer-events: none;    
+}

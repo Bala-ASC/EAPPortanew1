@@ -1,0 +1,105 @@
+ /*Step Form*/
+ #progressbar {
+    overflow: hidden;
+    color: #4D4D4F;
+  }
+
+    #progressbar .active {
+      color: #000000
+    }
+
+  .multi-step {
+    float: left;
+    width: 100%;
+  }
+  .choose-profile {
+    float: left;
+    width: 100%;
+    max-width: 830px;
+    background: #ffffff;
+    padding: 30px;
+    box-shadow: 0px 1px 4px #E5E9F2;
+    border-radius: 10px;
+  }
+
+  .ga-main {
+    float: left;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #EBEDF4;
+    border-radius: 5px;
+    padding: 30px 70px;
+  }
+
+    .ga-main h2 {
+      margin-bottom: 20px;
+    }
+
+    .ga-main {
+      padding: 20px 20px 10px 30px;
+    }
+
+    .active-Date-btn{
+      background:transparent linear-gradient(90deg, #1A55A6 0%, #153472 100%) 0% 0% no-repeat padding-box;transition:all 1s ease;
+    }
+    .active-Time-btn{
+    background:transparent linear-gradient(90deg, #1A55A6 0%, #153472 100%) 0% 0% no-repeat padding-box;transition:all 1s ease;
+    }
+    .time-sel ul li{
+      width: 150px;
+    }
+
+
+    .counsellor-form{max-width:800px; width:100%; margin:0 auto;}
+.counsellor-form p{font-size:18px;}
+.counsellor-info-form{background: rgba(220, 221, 222, 0.30); border-radius: 10px; padding:30px; float:left; width:100%;}
+.counsellor-info-form h4{color:#4D4D4F; text-transform:uppercase; margin-bottom:25px; margin-top:25px;font-family:'HelveticaNeueLTStd-Bd'; }
+
+.counsellor-info-form .form-control{background: rgba(220, 221, 222, 0.40); border:0px; border-radius:10px;display: inline-block; width: auto; height:40px;}
+.sml{ width:30px;display: inline-block;}
+
+.counsellor-info-form .form-control.name-feld{width:100%; max-width:340px;}
+.counsellor-info-form .form-control.of-field{width:100%; max-width:495px;}
+.counsellor-info-form .form-control.emergency-field{width:100%; max-width:340px;}
+.counsellor-info-form .form-control.phone-field{width:100%; max-width:170px;}
+.counsellor-info-form .form-control.sign-field{width:100%; max-width:172px;}
+.counsellor-info-form .form-control.date-field{width:100%; max-width:170px;}
+
+/* .f-input{display:inline-block; width:32%; margin-right:1.5%;} */
+/* .s-input{display:inline-block; width:35%;margin-right:1.5%;} */
+.t-input{display:inline-block;width:30%; }
+
+.is-invalid{
+  border: 0.5px solid red!important;
+  /* border-bottom-style:0.5px solid red!important; */
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+@media all and (max-width:767px){
+  .f-input,
+  .s-input,
+  .t-input{width:100%; margin-right: 0px; }
+
+  .counsellor-info-form .form-control.phone-field,
+  .counsellor-info-form .form-control.sign-field,
+  .counsellor-info-form .form-control.date-field{width:100%; max-width:100%;}
+}
+.edit-btn1{
+  left: 470px;
+  top: 5px;
+  position: absolute;
+  width:25px;
+  height: 25px;
+}

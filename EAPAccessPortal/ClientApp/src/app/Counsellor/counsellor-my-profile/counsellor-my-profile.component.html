@@ -1,0 +1,128 @@
+<div class="group-hd">
+  <!-- <ul class="top-bar order-md-1">
+      <li><a href="#"><img src="/assets/images/phone-call.svg" alt="phone call"> 1800 818 728</a></li>
+      <li><a href="make-a-booking.html"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> Make a booking</a></li>
+      <li><a href="#"><img src="/assets/images/chat.svg" alt="Instant Chat"> Instant Chat</a></li>
+  </ul> -->
+  <h1>My Profile</h1>
+</div>
+<form name="form" (ngSubmit)="f.form.valid && updateprofile()" #f="ngForm" novalidate>
+<div class="my-profile">
+  <div class="row">
+      <div class="col-sl-5 col-lg-5">
+        <div class="form-group">
+            <!-- <label>First Name:</label> -->
+            <img [src]="user.ProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"   class="img-thumnail" *ngIf="user.ProfilePhoto!=null">
+            <img src="/assets/images/defaultprofile_b.png" alt="User image"  *ngIf="((user.ProfilePhoto==null)||(user.ProfilePhoto==undefined))" class="img-thumnail">
+            <label style="margin-left: 20px;">Instant Chat Status:</label>
+            <label class="switch switch-label switch-pill switch-outline-primary-alt" style="padding-top: 13px;margin-left: 5px;">
+                <input [(ngModel)]="user.IsLive" name="IsActive" [attr.checked]='user.IsLive' (ngModelChange)="updateIsLive()"
+                  class="switch-input" type="checkbox"><span class="switch-slider" data-checked="✓"
+                  data-unchecked="✕"></span></label>
+        </div>
+          <div class="form-group app-field">
+              <label>First Name:</label>
+              <input type="text" class="form-control" name="firstName" [(ngModel)]="user.FirstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" placeholder="First Name" [readonly]="isRequired ? true : null"  />
+              
+          </div>
+          <div class="form-group app-field">
+              <label>Last Name:</label>
+              <input type="text" class="form-control" name="lastName" [(ngModel)]="user.LastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" placeholder="Last Name" [readonly]="isRequired ? true : null"   />
+             
+          </div>
+          <div class="form-group app-field">
+              <label>Email:</label>
+              <input type="text" class="form-control" name="email" [(ngModel)]="user.Email" #email="ngModel" placeholder="Email" readonly />
+           
+          </div>
+          <div class="form-group">
+            <!-- <input type="submit" value={{btntextvalue}} class="btn appoint-btn"> -->
+            <input type="button" value="Logout" class="btn"   data-toggle="modal" data-target="#logout-Appointment">
+          </div>
+          <!-- <div class="form-group app-field">
+              <label>Employer:</label>
+              <input type="text" class="form-control" name="employer" [(ngModel)]="user.OrganisationName" #employer="ngModel" placeholder="Employer" readonly/>
+          </div>
+          <div class="form-group app-field">
+              <label>Group:</label>
+              <div>
+                <select class="form-control" id="Groupselect" (change)="onGroupChange()" placeholder="Group"
+                name="Groupselect" [(ngModel)]="user.ClientOrgGroupId" [disabled]="isRequired ? true : null">
+                <option selected disabled value="0">Please select</option>
+                <option *ngFor="let group of groups" value="{{group.GroupId}}">
+                    {{group.GroupName}}
+                </option>
+            </select>
+            </div>
+            
+          </div>
+          <div class="form-group app-field">
+              <label>Division:</label>
+              <div>
+                <select class="form-control" id="Divisionselect" placeholder="Division" (change)="onDivisionChange()"
+                name="Divisionselect" [(ngModel)]="user.ClientOrgDivisionId" [disabled]="isRequired ? true : null" >
+                <option selected disabled value="0">Please select</option>
+                <option *ngFor="let division of divisions" value="{{division.DivisionId}}">
+                    {{division.DivisionName}}
+                </option>
+            </select>
+              </div>
+          </div>
+          <div class="form-group app-field">
+              <label>Department:</label>
+              <div>
+                <select class="form-control" id="Departmentselect" name="Departmentselect" placeholder="Departments"
+                [(ngModel)]="user.ClientOrgDepartmentId" [disabled]="isRequired ? true : null">
+                <option selected disabled value="0">Please select</option>
+                <option *ngFor="let department of departments" value="{{department.DepartmentId}}">
+                    {{department.DepartmentName}}
+                </option>
+            </select>
+              </div>
+          </div> -->
+      </div>
+
+      <!-- <div class="col-md-6 col-lg-4">
+          <div class="form-group app-field">
+              <label>Phone:</label>
+              <input type="text" class="form-control" name="phone" [(ngModel)]="user.MobileNo" #phone="ngModel" [ngClass]="{ 'is-invalid': f.submitted && phone.invalid }" placeholder="Phone" [readonly]="isRequired ? true : null" />   
+          </div>
+          <div class="form-group app-field">
+              <label>DOB:</label>
+              <div  class="col-sm-10">
+                <input type="text"
+            class="form-control" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+            #dp="bsDatepicker" [(ngModel)]="user.DateOfBirth"
+            bsDatepicker [(bsValue)]="bsValue" placeholder="Date Of Birth" [attr.disabled]="isRequired ? true : null">
+              </div>
+          </div>
+          <div class="form-group app-field">
+              <label>Post Code:</label>
+              <input type="text" class="form-control" name="postcode" [(ngModel)]="user.PostCode" #postcode="ngModel" [ngClass]="{ 'is-invalid': f.submitted && postcode.invalid }" placeholder="Post Code" [readonly]="isRequired ? true : null"/>   
+              
+          </div>
+          <div class="form-group">
+            <input type="submit" value={{btntextvalue}} class="btn appoint-btn">
+             
+          </div>
+      </div> -->
+  </div>
+  <div class="modal fade small-modal" id="logout-Appointment">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">        
+        <div class="modal-body">
+            <div class="cancel-apntmnt">
+                <p>Are you sure you want to log out?</p>
+                <div class="btn-grp">
+                    <a (click)="logOut()"  class="btn appoint-btn" data-dismiss="modal">Yes. Log me out</a>
+                </div>
+                <div class="btn-grp">
+                    <a href="#" class="cancel-text-link" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</form>

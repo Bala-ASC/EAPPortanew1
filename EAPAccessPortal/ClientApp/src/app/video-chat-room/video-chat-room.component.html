@@ -1,0 +1,244 @@
+<div class="group-hd">
+  <ul *ngIf="currentUser.RoleId!=5" class="top-bar order-md-1">
+    <li><a href="tel:1800818728"><img src="/assets/images/phone-call.svg" alt="phone call"> 1800 818 728</a></li>
+    <li><a href="make-a-booking.html"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> Make a
+        booking</a></li>
+    <li><a href="javascript:;"><img src="/assets/images/chat.svg" alt="Chat Now">Chat Now</a></li>
+  </ul>
+  <h1>Quick Consultation</h1>
+</div>
+
+
+
+<!--Video chat-->
+
+<div class="chat-main">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chat-box video-loading-screen">
+        <div class="online-user">
+          <div class="user-frame">
+            <div class="user-img">
+              <span class="user-active">&nbsp;</span>
+              <figure *ngIf="currentUser.RoleId==5"> <img [src]="currentLiveChatAppts.ClientProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"  *ngIf="currentLiveChatAppts.ClientProfilePhoto!=null" style="min-height: 45px;object-fit:cover;">
+              </figure>
+              <figure *ngIf="currentUser.RoleId!=5"> <img [src]="currentLiveChatAppts.CounsollerProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"  *ngIf="currentLiveChatAppts.CounsollerProfilePhoto!=null" style="min-height: 45px;object-fit:cover;">
+              </figure>
+            </div>
+            <div class="name-desig">
+              <h2 *ngIf="!currentLiveChatAppts.IsForFamilyMember">{{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}}</h2>
+              <h2 *ngIf="currentLiveChatAppts.IsForFamilyMember">{{currentUser.RoleId==5?currentLiveChatAppts.FMFirstName:currentLiveChatAppts.CounsellorName}}</h2>
+              <h3>{{currentUser.RoleId==5?'EAP Client':'EAP Counsellor'}}</h3>
+            </div>
+            <div  *ngIf="currentUser.RoleId==5" class="chat-dropdown cls-3dots cls-3dotscustomMenu">
+              <a data-toggle="dropdown">
+                <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+              </a>
+              <div *ngIf="currentUser.RoleId==5" class="dropdown-menu cls-3dots cls-3dotscustom">
+                <a class="dropdown-item user-modal" href="javascript:;">See User Profile</a>
+                <!-- <a class="dropdown-item" href="javascript:;">About</a>
+                <a class="dropdown-item" href="javascript:;">Session</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="voximplant_container" class="video-frame">
+          <!-- <div ></div>
+            <p>Your counsellor, Sarah Adams, has just joined.</p> -->
+          <div *ngIf="!IsVisibleText" class="messageChat">
+            <div *ngIf="currentLiveChatAppts.EndDateDiffMins > 0 ">
+              <div _ngcontent-c2="" class="messageChat" *ngIf="currentLiveChatAppts.StartDateDiffMins < 10  || currentLiveChatAppts.StartDateDiffMins==10">
+            <!-- Your {{currentUser.RoleId==5?'Client':'Counsellor'}}, {{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}} has not joined yet. -->
+            {{StatingMsg}}
+
+
+            <div class="white-dot">
+              <span>&nbsp;</span>
+              <span>&nbsp;</span>
+              <span>&nbsp;</span>
+            </div>
+          </div>
+        </div>
+        <div _ngcontent-c2="" class="messageChat"  *ngIf="currentLiveChatAppts.StartDateDiffMins > 10">    Your appointment is scheduled for  {{currentLiveChatAppts.startDate}} {{currentLiveChatAppts.startTime}}
+          <div _ngcontent-c2="" class="white-dot black-dot">
+            <span _ngcontent-c2="">&nbsp;</span>
+            <span _ngcontent-c2="">&nbsp;</span>
+            <span _ngcontent-c2="">&nbsp;</span>
+        </div></div>
+        <div *ngIf="currentLiveChatAppts.StartDateDiffMins < 0 ">
+          <!-- <div *ngIf="currentLiveChatAppts.DurationMins < currentLiveChatAppts.StartDateDiffMinsposite">
+            You appointment time is completed
+          </div> -->
+          <div _ngcontent-c2="" class="messageChat"  *ngIf="currentLiveChatAppts.DurationMins < currentLiveChatAppts.StartDateDiffMinsposite">   You appointment time is completed.
+            <div _ngcontent-c2="" class="white-dot black-dot">
+              <span _ngcontent-c2="">&nbsp;</span>
+              <span _ngcontent-c2="">&nbsp;</span>
+              <span _ngcontent-c2="">&nbsp;</span>
+          </div></div>
+
+        </div>
+        <!-- <div _ngcontent-c2="" class="messageChat" *ngIf="currentLiveChatAppts.IsCompleted==1">  You appointment time is completed.
+          <div _ngcontent-c2="" class="white-dot black-dot">
+            <span _ngcontent-c2="">&nbsp;</span>
+            <span _ngcontent-c2="">&nbsp;</span>
+            <span _ngcontent-c2="">&nbsp;</span>
+        </div></div> -->
+        <!-- <div _ngcontent-c2="" class="messageChat" *ngIf="currentLiveChatAppts.IsStarted==1 && currentLiveChatAppts.IsCompleted==0">  Your appointment is already started .
+          <div _ngcontent-c2="" class="white-dot black-dot">
+            <span _ngcontent-c2="">&nbsp;</span>
+            <span _ngcontent-c2="">&nbsp;</span>
+            <span _ngcontent-c2="">&nbsp;</span>
+        </div></div> -->
+
+          </div>
+          <div id="caller" class="caller video-small-cls"></div>
+          <!--  <div id="receiver" class="receiver video-small-cls"></div> -->
+        </div>
+
+        <div class="video-call-nav">
+          <li>
+            <a href="javascript:;" id="Userlogin" style="display: none;" #Userlogin onclick="UserLogin()"><img
+                src="/assets/images/mic.svg" alt=""></a>
+            <a href="javascript:;" rel="1" id="muteAudio" onclick="MuteVideoVoice(this);" style="display: none;"
+              #muteAudio><img src="/assets/images/mic.svg" alt=""></a></li>
+          <li>
+            <a href="javascript:;" style="display: none;background-color: green;" id="AudioCallStart"
+              onclick="AudioCallStart()"><img src="/assets/images/video-phone.svg" alt=""></a>
+            <a id="shareVideo" rel="1" #shareVideo  (click)="toggleVideoSharing()" ><img src="/assets/images/video.svg" alt=""></a></li>
+
+          <li>
+            <a href="javascript:;" style="display: none;" id="EndCall" (click)="EndCallforClientCouns()"
+             ><img src="/assets/images/video-phone.svg" alt=""></a>
+              <a href="javascript:;" style="display: none;" id="VideoDisabled" onclick="IsVideoDisabled()"></a>
+            <a href="javascript:;" style="display: none;" id="EndCallforBoth" onclick="EndCallForbothClientCouns()"><img
+                src="/assets/images/video-phone.svg" alt=""></a>
+                <a href="javascript:;"  hidden style="display: none;" id="EndCallforBothdasboard" onclick="EndCallForbothClientCounsdasboard()"><img
+                  src="/assets/images/video-phone.svg" alt=""></a>
+            <a href="javascript:;" [attr.userData]="BindUserCredentials()" [attr.RoleId]="this.currentUser.RoleId"
+              id="callCreate" #callCreate style="display: none;"></a>
+            <input id="phonenum" [(ngModel)]="callingUser" style="display:none;" type="text" class="form-control"
+              placeholder="Username"></li>
+
+        </div>
+        <!-- <div class="video-call-nav">
+
+            <li>
+
+              <a [attr.userData]="BindUserCredentials()" onclick="AudioCallStart()"  href="javascript:;" id="startCall"
+                style="background-color:#fff;">
+                <img src="/assets/images/video.svg" alt="" /></a>
+
+
+              <a href="javascript:;"  id="btnVoiceControl" class="ml-2" style="background-color:#fff">
+                <img src="/assets/images/mic.svg" alt="" /></a>
+
+
+
+
+              <a [attr.userData]="BindUserCredentials()" class="ml-2" href="javascript:;" id="callStartButton"
+                style="background-color: green;"><img src="/assets/images/video-phone.svg" alt="" /></a>
+
+              <a *ngIf="(this.currentUser.RoleId == 5 && this.isClientConnected) || isCounsellorConnected"
+                [attr.userData]="BindUserCredentials()" href="javascript:;" id="endCall"
+                style="background-color: red;"><img src="/assets/images/video-phone.svg" alt="" /></a>
+
+
+
+              <a href="javascript:;" [attr.userData]="BindUserCredentials()" id="callCreate" #callCreate
+                style="display: none;"></a>
+              <input id="phonenum" [(ngModel)]="callingUser" style="display:none;" type="text" class="form-control"
+                placeholder="Username">
+
+            </li>
+          </div> -->
+      </div>
+    </div>
+
+    <div class="col-md-6 position-relative">
+      <div id="profile-modal" class="profile-modal" style="display:none;">
+        <a class="close-modal"><img src="/assets/images/close-circle.svg" alt="close"></a>
+        <div class="pm-user-avtar">
+          <span class="user-active">&nbsp;</span>
+          <img [src]="currentLiveChatAppts.ClientProfilePhoto" onError="this.onerror=null;this.src='/assets/images/defaultprofile_b.png';"  class="img-thumnail"  *ngIf="currentLiveChatAppts.ClientProfilePhoto!=null">
+        </div>
+        <ul *ngIf=!currentLiveChatAppts.IsForFamilyMember>
+          <li><span>{{currentUser.RoleId==5?currentLiveChatAppts.Username:currentLiveChatAppts.CounsellorName}}</span></li>
+          <li>Employer: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientOrganisationName:currentLiveChatAppts.CounsellerOrganisationName}}</span></li>
+          <li>Group: <span>{{currentLiveChatAppts.GroupName}}</span></li>
+          <li>Division: <span>{{currentLiveChatAppts.DivisionName}}</span></li>
+          <li>Department: <span>{{currentLiveChatAppts.DepartmentName}}</span></li>
+          <li>Email: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientEmail:currentLiveChatAppts.CounsellerEmail}}</span></li>
+          <li>Phone: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientMobileNo:currentLiveChatAppts.CounsellerMobileNo}}</span></li>
+          <li>Post Code: <span>{{currentUser.RoleId==5?currentLiveChatAppts.ClientPostcode:currentLiveChatAppts.CounsellerPostcode}}</span></li>
+          <li>DOB: <span>{{currentLiveChatAppts.clientDob}}</span></li>
+        </ul>
+        <ul *ngIf=currentLiveChatAppts.IsForFamilyMember>
+          <li><span>{{currentLiveChatAppts.FMFirstName}}</span></li>
+          <li>Email: <span>{{currentLiveChatAppts.FMEmail}}</span></li>
+          <li>Phone: <span>{{currentLiveChatAppts.FMPhone}}</span></li>
+          <li>DOB: <span>{{currentLiveChatAppts.FmailyDob}}</span></li>
+        </ul>
+      </div>
+    </div>
+    <div  *ngIf="Chatappoitmettimeisover" >
+      <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+           <div class="modal-body">
+               <div class="cancel-apntmnt">
+                   <p style="text-align: center !important">Your appointment time is over. So chat is ended</p>
+                   <div class="btn-grp" style="width: 50% !important;padding-left: 28% !important;">
+                       <a href="javascript:void(0)" (click)="YesmodelchatendOk()" class="btn appoint-btn" data-dismiss="modal">OK</a>
+                   </div>
+                   <!-- <div class="btn-grp" style="width: 48% !important;">
+                       <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+                   </div> -->
+               </div>
+           </div>
+         </div>
+       </div>
+    </div>
+
+    </div>
+    <div  *ngIf="Chatisstatrdendedstop" >
+      <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+           <div class="modal-body">
+               <div class="cancel-apntmnt">
+                   <p style="text-align: center !important">The person you are speaking to has left the chat room. You may now close this window. If you were not expecting your session to end, please return to the Home screen and re-join.</p>
+                   <div class="btn-grp" style="width: 50% !important;padding-left: 28% !important;">
+                       <a href="javascript:void(0)" (click)="YesmodelchatendOkclient()" class="btn appoint-btn" data-dismiss="modal">OK</a>
+                   </div>
+                   <!-- <div class="btn-grp" style="width: 48% !important;">
+                       <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+                   </div> -->
+               </div>
+           </div>
+         </div>
+       </div>
+   </div>
+
+   </div>
+   <div  *ngIf="Chatisdisconectnternet" >
+    <div class="modal" style="display: block!important;background: rgba(255, 255, 255, 0.5);">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-body">
+             <div class="cancel-apntmnt">
+                 <p>The person you are speaking to has left the chat room. You may now close this window. If you were not expecting your session to end, please return to the Home screen and re-join.</p>
+                 <div class="btn-grp" style="width: 50% !important;padding-left: 28% !important;">
+                     <a href="javascript:;" (click)="YesmodelchatendOkInternet()" class="btn appoint-btn" data-dismiss="modal">OK</a>
+                 </div>
+                 <!-- <div class="btn-grp" style="width: 48% !important;">
+                     <a href="javascript:;" (click)="Cancelmodelchatend()" class="cancel-text-link" data-dismiss="modal" >No</a>
+                 </div> -->
+             </div>
+         </div>
+       </div>
+     </div>
+  </div>
+  </div>
+
+  </div>
+</div>

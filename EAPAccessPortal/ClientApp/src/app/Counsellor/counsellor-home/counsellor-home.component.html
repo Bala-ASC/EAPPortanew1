@@ -1,0 +1,87 @@
+<div class="group-hd">
+    <!-- <ul class="top-bar order-md-1">
+        <li><a href="#"><img src="/assets/images/phone-call.svg" alt="phone call"> <span>1800 818 728</span></a></li>
+        <li><a href="#"><img src="/assets/images/calendar-alt.svg" alt="Make a booking"> <span>Make a booking</span></a></li>
+        <li><a href="#"><img src="/assets/images/chat.svg" alt="Instant Chat"> <span>Instant Chat</span></a></li>
+    </ul> -->
+    <h1>Home</h1>
+</div>
+
+<div class="white-board">
+    <div *ngIf="sucussmsg" class="month-heading"><img src="/assets/images/calendar-alt.svg" alt="calendar" /> This Month</div>
+    <div *ngIf="!sucussmsg" class="month-heading mt-3">
+        <div class="alert-danger"><img src="/assets/images/calendar-alt-red.svg" alt="calendar"/> <span>Your appointment has been cancelled.</span></div>
+    </div>
+    <div class="clear-div">
+        <div class="row">
+            <!-- <div class="col-md-6 col-lg-4">
+                <div class="session-box">
+                    <div class="session-dropdown"></div>
+                    <div class="session-left">
+                        <span>&nbsp;</span>
+                    </div>
+                    <div  class="session-right">
+                        <h3>Session Allowance : {{ClientDashboardSessions.AllowedAppts}}</h3>
+                        <h3 class="red-clr">Sessions Used: {{ClientDashboardSessions.UsedAppts}}</h3>
+                        <h3 class="blue-clr">Sessions Remaining: {{ClientDashboardSessions.AllowedAppts - ClientDashboardSessions.UsedAppts<0?0:ClientDashboardSessions.AllowedAppts - ClientDashboardSessions.UsedAppts}} </h3>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let item of CurrentmonthAppts" >
+                <div class="session-box" >
+                    <div class="session-dropdown">
+                        <a href="#" data-toggle="dropdown" *ngIf="!item.IsPast && item.ActivityName !='Face to Face Chat' && item.ActivityName !='Telephone Chat'" >
+                            <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a *ngIf="((item.ActivityName =='Live Chat ')||(item.ActivityName =='Scheduled Chat '))" class="dropdown-item" routerLink="/dashboard-counsellor/counsellor-chatroom/{{item.ACEAppointmentId}}">Go To Appointment</a>
+                            <a class="dropdown-item" (click)="RedirectVideoChat(item.ACEAppointmentId)"
+                            *ngIf="item.ActivityName=='Video Chat'" href="javascript:;">Go To Appointment</a>
+                            <!-- <a  *ngIf="!item.IsPast" class="dropdown-item" (click)="onChangeAppointment(item.ACEAppointmentId)"  data-toggle="modal" data-target="#Cancel-Appointment">Change Appointment</a> -->
+                        </div>
+                    </div>
+                    <div class="modal fade small-modal" id="Cancel-Appointment">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="cancel-apntmnt">
+                                    <p>Are you sure you want to change your appointment? We'll have to cancel it and you can schedule a new one.</p>
+                                    <p>Please be advised that any appointments cancelled within 24 hours of your session will count towards your allocated session quota.</p>
+                                    <div class="btn-grp">
+                                        <a (click)="ChangeAppointment()" class="btn appoint-btn" data-dismiss="modal">Yes. Cancel Appointment.</a>
+                                    </div>
+                                    <div class="btn-grp">
+                                        <a href="#" class="cancel-text-link" data-dismiss="modal">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="session-left">
+
+                            <span class="blue-bg" *ngIf="item.ActivityName =='Video Chat'" >&nbsp;</span>
+                            <span class="green-bg" *ngIf="item.ActivityName =='Live Chat '">&nbsp;</span>
+                            <span class="gry-bg" *ngIf="item.ActivityName =='Face to Face Chat'">&nbsp;</span>
+                            <span class="sky-bg" *ngIf="item.ActivityName =='Telephone Chat'">&nbsp;</span>
+                            <span class="green-bg" *ngIf="item.ActivityName =='Scheduled Chat '">&nbsp;</span>
+
+                    </div>
+                    <div class="session-right">
+                        <h3 *ngIf="item.ActivityName=='Video Chat'">Video</h3>
+                        <h3 *ngIf="item.ActivityName=='Scheduled Chat '">AccessChat</h3>
+                        <h3 *ngIf="item.ActivityName =='Live Chat '">Live Chat</h3>
+                        <h3 *ngIf="item.ActivityName =='Telephone Chat'">Phone</h3>
+                        <h3 *ngIf="item.ActivityName =='Face to Face Chat'">Face to Face</h3>
+                        <p>{{item.startDate}} {{item.startTime}}</p>
+                        <p *ngIf=item.IsForFamilyMember>Client: {{item.FMFirstName}}</p>
+                        <p  *ngIf=!item.IsForFamilyMember>Client: {{item.Username}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

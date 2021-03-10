@@ -1,0 +1,11 @@
+.messageChat {
+    color: #fff;
+   /* margin-left: 40px;*/
+    width: 100% !important;
+    text-align: center;
+}
+
+.cls-3dots {
+    z-index: 9999;
+    position: relative;
+}

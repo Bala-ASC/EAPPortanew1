@@ -1,0 +1,51 @@
+<div *ngIf="show"><form [formGroup]="employerGroup" (ngSubmit)="login()">
+    <div *ngIf="isLoad" class="loader-overlay">
+        <div class="loader1"></div>
+    </div>
+  <div class="counsellor-form">
+      <div class="p-3">
+          <p>Hi {{FMName}}, in order for your counsellor to be able to conduct your session, they'll need to have this consent form completed. Please take a minute to submit it.</p>
+      </div>
+      <div class="counsellor-info-form">
+          <p><strong>Welcome</strong> and thank you for contacting AccessEAP, the provider of your organisation's Employee Assistance Program (EAP).  It is our aim to provide you with a professional assessment, appropriate counselling, and where necessary, a referral to meet your needs.  Your counsellor will provide assistance and support for a personal or a work-related issue.  This could involve from one to six hours counselling, depending on the agreement we have with your employer.</p>
+          <p>As part of providing a counselling service to you the counsellor will need to collect and record personal information from you that is relevant to your current situation.  This information will be a necessary part of the assessment and treatment that is conducted by your counsellor.  You may view and have a copy of the material recorded in your file upon request, subject to the exceptions in Australian Privacy Principle 12.</p>
+          <p>Prior to your first counselling session we ask you to complete an Intake Questionnaire and at the end of your counselling we will invite you, via email, to complete an online evaluation of the service you have received.  You do not have to complete these forms, but we would like you to, because it helps us provide a good quality service.</p>
+          
+          <h4>CONFIDENTIALITY GUARANTEED</h4>
+  
+          <p>AccessEAP guarantees confidentiality of all sessions, unless written permission is given by you to (a) discuss information with another professional, family member, work colleague or employer or (b) provide a written report to another professional or agency. However, confidentiality may be overridden in circumstances where there is a current or prospective serious risk of injury, either physical or emotional, to any person including yourself, or if a court issues a subpoena. All information you provide on the Intake Questionnaire and the Evaluation Form are also confidential.  Only statistical data is reported back to Companies and Organisations, and never in a way that identifies individuals.</p>
+  
+          <h4>KEEPING APPOINTMENTS</h4>
+          <p>It is important to give at least 24 hours notice if you are unable to keep an appointment so that another client may be able to use that time period.  If you do not give 24 hours notice or do not attend for a counseling session, this session is still included in the number allocated by your employer.  You will therefore forfeit this session.</p>
+          
+          
+          <!-- <form> -->
+              <p><span class="sml">I</span> <input type="text" style="text-transform:uppercase" class="form-control name-feld" formControlName="FullName" [ngClass]="{ 'is-invalid': employerSubmitted && fe.FullName.errors }" > (Insert Name)</p>
+              <p><span class="sml">of,</span> <input type="text" style="text-transform:uppercase" class="form-control of-field" formControlName="Address" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Address.errors }"> (Insert Address)</p>
+              <p>have read and understood the above information.  I agree to these conditions for the counselling service provided by AccessEAP.</p>
+              <p>An emergency contact person for me is:  <input type="text" class="form-control emergency-field" formControlName="EmergencyContactPerson" [ngClass]="{ 'is-invalid': employerSubmitted && fe.EmergencyContactPerson.errors }"></p> 
+              <p class="f-input">Phone: <input type="text" maxlength="10" minlength="10"  class="form-control phone-field"  formControlName="Phone" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Phone.errors }" onlyNumber>
+               </p>
+              <p class="s-input">Signature: <input type="text" class="form-control sign-field" formControlName="Signature" [ngClass]="{ 'is-invalid': employerSubmitted && fe.Signature.errors }"></p>
+              <p class="t-input">Date: <input class="form-control date-field" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false,adaptivePosition: true }" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" type="text" formControlName="CreatedDate" [ngClass]="{ 'is-invalid': employerSubmitted && fe.CreatedDate.errors }" [attr.disabled]=true></p>
+              <p>Please note: If, after reading this page you are at all unsure of what is written, please discuss it with the counsellor.</p>
+          <!-- </form>                          -->
+      </div>
+       <input type="submit" name="next" class="btn appoint-btn mt-4" value="Submit" style="margin-left: 30px;"/>
+  </div>
+ 
+  </form>
+</div>
+<div *ngIf="show1" class="counsellor-form">
+    <div class="p-3">
+       <div></div>
+    </div>
+    <div class="counsellor-info-form" style="text-align: center;">
+        <p><strong>Thank you {{FMName}} , We had received your consent form submission.</strong></p>
+        
+        <!-- </form>                          -->
+    </div>
+     
+</div>
+<toaster-container [toasterconfig]="config">
+</toaster-container>
