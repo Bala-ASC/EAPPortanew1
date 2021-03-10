@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAPAccessPortal", "EAPAccessPortal\EAPAccessPortal.csproj", "{A5E1200B-34A9-40ED-883A-A1D0A168A643}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAPAccess.BAL", "EAPAccess.BAL\EAPAccess.BAL.csproj", "{99F8C517-9521-44DD-984D-123D023DBFCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAPAccess.DAL", "EAPAccess.DAL\EAPAccess.DAL.csproj", "{68283E11-2FAE-42C9-AA20-4DB18276CB10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAPAccess.Entities", "EAPAccess.Entities\EAPAccess.Entities.csproj", "{609D0B18-FD66-4876-9089-04F0B8D1EBA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAPAccess.Common", "EAPAccess.Common\EAPAccess.Common.csproj", "{DD2797DB-789D-4BB8-9BCC-4FA60B7139E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAP.ACE.ApiTest", "EAP.ACE.ApiTest\EAP.ACE.ApiTest.csproj", "{31F741FC-C540-4D3C-B591-C8F327021D99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAP.ACE.Service", "EAP.ACE.Service\EAP.ACE.Service.csproj", "{01C3C2CD-CE88-473C-B9F8-74C899447EDF}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5E1200B-34A9-40ED-883A-A1D0A168A643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5E1200B-34A9-40ED-883A-A1D0A168A643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5E1200B-34A9-40ED-883A-A1D0A168A643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5E1200B-34A9-40ED-883A-A1D0A168A643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F8C517-9521-44DD-984D-123D023DBFCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F8C517-9521-44DD-984D-123D023DBFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F8C517-9521-44DD-984D-123D023DBFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F8C517-9521-44DD-984D-123D023DBFCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68283E11-2FAE-42C9-AA20-4DB18276CB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68283E11-2FAE-42C9-AA20-4DB18276CB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68283E11-2FAE-42C9-AA20-4DB18276CB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68283E11-2FAE-42C9-AA20-4DB18276CB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{609D0B18-FD66-4876-9089-04F0B8D1EBA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{609D0B18-FD66-4876-9089-04F0B8D1EBA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{609D0B18-FD66-4876-9089-04F0B8D1EBA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{609D0B18-FD66-4876-9089-04F0B8D1EBA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2797DB-789D-4BB8-9BCC-4FA60B7139E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2797DB-789D-4BB8-9BCC-4FA60B7139E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2797DB-789D-4BB8-9BCC-4FA60B7139E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2797DB-789D-4BB8-9BCC-4FA60B7139E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F741FC-C540-4D3C-B591-C8F327021D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F741FC-C540-4D3C-B591-C8F327021D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F741FC-C540-4D3C-B591-C8F327021D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F741FC-C540-4D3C-B591-C8F327021D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C3C2CD-CE88-473C-B9F8-74C899447EDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C3C2CD-CE88-473C-B9F8-74C899447EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C3C2CD-CE88-473C-B9F8-74C899447EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C3C2CD-CE88-473C-B9F8-74C899447EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FAB938F-9933-4847-A2CB-D66B7429C3F2}
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
